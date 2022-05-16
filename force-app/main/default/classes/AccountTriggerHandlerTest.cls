@@ -3,8 +3,8 @@ private class AccountTriggerHandlerTest{
 
     private static final Integer ACCOUNT_NUMBER = 5;
     @TestSetup
-    static void cteateAccounts(){
-        TestDataFactory.createAccounts(ACCOUNT_NUMBER);
+    static void testSetup(){
+        TestDataFactory.createAccounts(ACCOUNT_NUMBER, true);
     }
 
     @isTest static void testCreateOpportunity(){
@@ -14,10 +14,9 @@ private class AccountTriggerHandlerTest{
             List<Opportunity> opps = [SELECT Id, Name, StageName, CloseDate, Account.Name FROM Opportunity];
             System.assertEquals(ACCOUNT_NUMBER, opps.size());
             
-            System.assertEquals(opps[0].Name, opps[0].Account.Name + Date.today().month() + Date.today().year());
-            System.assertEquals(opps[0].StageName, 'Prospecting');
-            System.assertEquals(opps[0].CloseDate, Date.today()+90);
-
+            System.assertEquals(opps.get(0).Name, opps.get(0).Account.Name + Datetime.now().format('yyyyMM'));
+            System.assertEquals(opps.get(0).StageName, 'Prospecting');
+            System.assertEquals(opps.get(0).CloseDate, Date.today().addDays(90));
         Test.StopTest();
     }
 
@@ -30,7 +29,7 @@ private class AccountTriggerHandlerTest{
         Test.StopTest();
 
         List<Opportunity> opps = [SELECT Id, Name, AccountId FROM Opportunity WHERE Account.Id =:account.Id];
-        System.assertEquals(opps[0].Name.contains(account.Name), true, 'Opportunity name should contain Account name');
+        System.assert(opps.get(0).Name.contains(account.Name), 'Opportunity name should contain Account name');
     }
 
     @isTest static void testDeleteOpportunity(){

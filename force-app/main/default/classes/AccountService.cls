@@ -5,9 +5,9 @@ public with sharing class AccountService {
         for(Account acc: listNewAccounts){
             Opportunity opp = new Opportunity(
                 AccountId = acc.Id,
-                Name = String.format(Label.OpportunityNameFormat, new List<Object> {acc.Name, Date.today().month(), Date.today().year()}),
+                Name = String.format(Label.OpportunityNameFormat, new List<Object> {acc.Name, Datetime.now().format('yyyyMM')}),
                 StageName = 'Prospecting',
-                CloseDate = Date.today() + 90
+                CloseDate = Date.today().addDays(90)
             );
             listOpportunities.add(opp);
         }
@@ -21,7 +21,12 @@ public with sharing class AccountService {
                     mapUpdatedNamesById.put(acc.Id, acc.Name);
             }
         }
-        List<Opportunity> listOpportunities = [SELECT Id, Name, AccountId, CreatedDate FROM Opportunity WHERE AccountId IN:mapUpdatedNamesById.keySet()];
+        List<Opportunity> listOpportunities = [
+                SELECT Id, Name, AccountId, CreatedDate 
+                FROM Opportunity 
+                WHERE 
+                AccountId IN:mapUpdatedNamesById.keySet()
+            ];
         for(Opportunity opp: listOpportunities){
             opp.Name = String.format(
                 Label.OpportunityNameFormat, 
@@ -32,7 +37,11 @@ public with sharing class AccountService {
     }
     
     public static void deleteOpportunities(List<Account> listOldAccounts){
-        List<Opportunity> oppToDelete = [SELECT Id, Name, AccountId, Account.Owner.Name, Account.Owner.Email FROM Opportunity WHERE AccountId IN:listOldAccounts];
+        List<Opportunity> oppToDelete = [
+            SELECT Id, Name, AccountId, Account.Owner.Name, Account.Owner.Email 
+            FROM Opportunity 
+            WHERE AccountId IN:listOldAccounts
+        ];
         Map<Id, User> mapOwners = new Map<Id, User>();
         Map<Id, List<String>> mapOppsToSendByAccount = new Map<Id, List<String>>();
 

@@ -1,6 +1,7 @@
 @isTest
 public class TestDataFactory {
-    public static void createAccounts(Integer numOfAccounts){
+    @TestVisible private static Integer DEFAULT_SALES_ITEMS_CAPACITY = 3;
+    public static List<Account> createAccounts(Integer numOfAccounts, Boolean doInsert){
         List<Account> testAccounts = new List<Account>();
         for(Integer i=0;i<numOfAccounts;i++){
             testAccounts.add(new Account(
@@ -8,6 +9,9 @@ public class TestDataFactory {
                 Account_level__c='Neutral'
             ));
         }
-        insert testAccounts;
+        if(doInsert){
+            insert testAccounts;
+        }
+        return testAccounts;
     }
 }
