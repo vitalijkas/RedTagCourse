@@ -1,11 +1,11 @@
 public with sharing class AccountService {
     
-    public static void createOpportunities(List<Account> listNewAccounts){
+    public static void createOpportunities(List<Account> newAccountList){
         List<Opportunity> listOpportunities = new List<Opportunity>();
-        for(Account acc: listNewAccounts){
+        for(Account acc: newAccountList){
             Opportunity opp = new Opportunity(
                 AccountId = acc.Id,
-                Name = String.format(Label.OpportunityNameFormat, new List<Object> {acc.Name, Datetime.now().format('yyyyMM')}),
+                Name = String.format('{0}{1}', new List<Object> {acc.Name, Datetime.now().format('yyyyMM')}),
                 StageName = 'Prospecting',
                 CloseDate = Date.today().addDays(90)
             );
@@ -14,9 +14,9 @@ public with sharing class AccountService {
         insert listOpportunities;
     }
 
-    public static void updateOpportunities(List<Account> listNewAccounts, Map<Id, Account> mapOldAccounts){
+    public static void updateOpportunities(List<Account> newAccountList, Map<Id, Account> mapOldAccounts){
         Map<Id, String> mapUpdatedNamesById = new Map<Id, String>();
-        for(Account acc: listNewAccounts){
+        for(Account acc: newAccountList){
             if(acc.Name != mapOldAccounts.get(acc.Id).Name){
                     mapUpdatedNamesById.put(acc.Id, acc.Name);
             }
@@ -55,7 +55,7 @@ public with sharing class AccountService {
             }
             mapOppsToSendByAccount.get(op.AccountId).add(
                 String.format(
-                    Label.myOppFormatLabel,  
+                    '{0}. {1}, {2}',  
                     new List<Object> {mapOppsToSendByAccount.get(op.AccountId).size() + 1, op.Id, op.Name}
                 )
             );
@@ -74,9 +74,7 @@ public with sharing class AccountService {
             email.setSubject(emailTemplate.Subject);
             email.setPlainTextBody(plainBody);
             listEmails.add(email);
-            System.debug('Plain body ->' + plainBody);
         }
-        System.debug('List emails ->' + listEmails);
 
         Messaging.sendEmail(listEmails);
         delete oppToDelete;

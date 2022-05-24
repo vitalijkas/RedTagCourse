@@ -2,9 +2,8 @@
 private class AccountTriggerHandlerTest{
 
     private static final Integer ACCOUNT_NUMBER = 5;
-    @TestSetup
-    static void testSetup(){
-        TestDataFactory.createAccounts(ACCOUNT_NUMBER, true);
+    @TestSetup static void testSetup(){
+        insert TestDataFactory.createAccounts(ACCOUNT_NUMBER);
     }
 
     @isTest static void testCreateOpportunity(){
@@ -13,8 +12,7 @@ private class AccountTriggerHandlerTest{
             System.assertEquals(ACCOUNT_NUMBER, accounts.size());
             List<Opportunity> opps = [SELECT Id, Name, StageName, CloseDate, Account.Name FROM Opportunity];
             System.assertEquals(ACCOUNT_NUMBER, opps.size());
-            
-            System.assertEquals(opps.get(0).Name, opps.get(0).Account.Name + Datetime.now().format('yyyyMM'));
+            System.assertEquals(opps.get(0).Name, String.format('{0}{1}', new List<Object> {opps.get(0).Account.Name, Datetime.now().format('yyyyMM')}));
             System.assertEquals(opps.get(0).StageName, 'Prospecting');
             System.assertEquals(opps.get(0).CloseDate, Date.today().addDays(90));
         Test.StopTest();
