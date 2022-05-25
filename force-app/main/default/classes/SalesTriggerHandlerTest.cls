@@ -2,26 +2,26 @@
 private class SalesTriggerHandlerTest {
 
     private static final Integer OBJECT_NUMBER = 3;
-    @TestSetup
-    static void testSetup(){
-        TestDataFactory.createOpportunities(OBJECT_NUMBER, true);
+
+    @TestSetup static void testSetup(){
+        insert TestDataFactory.createOpportunities(OBJECT_NUMBER);
     }
 
-    @isTest static void testCreateSales(){
+    @isTest static void createSales_test(){
         List<Opportunity> listOpportunities = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity LIMIT 1];
-        System.assertEquals(TestDataFactory.DEFAULT_SALES_ITEMS_CAPACITY, listOpportunities.get(0).Sales_Items_Capacity__c);
-        System.assertEquals(0, listOpportunities.get(0).CurrentSalesItemsNumber__c);
-        TestDataFactory.createSales(1, listOpportunities.get(0).Id, true);
+        List<Sales__c> listSales = TestDataFactory.createSales(1, listOpportunities.get(0).Id);
+        Test.StartTest();
+            insert listSales;
+        Test.StopTest();
         Opportunity opportunityUpdated = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity WHERE Id=:listOpportunities.get(0).Id];
         System.assertEquals(1, opportunityUpdated.CurrentSalesItemsNumber__c);
     }
 
-    @isTest static void testCreateSales_error(){
+    @isTest static void testCreateSales_negative(){
         List<Opportunity> listOpportunities = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity LIMIT 1];
-        System.assertEquals(TestDataFactory.DEFAULT_SALES_ITEMS_CAPACITY, listOpportunities.get(0).Sales_Items_Capacity__c);
-        System.assertEquals(0, listOpportunities.get(0).CurrentSalesItemsNumber__c);
         try{
-            TestDataFactory.createSales(4, listOpportunities.get(0).Id, true);
+            List<Sales__c> listSales = TestDataFactory.createSales(4, listOpportunities.get(0).Id);
+            insert listSales;
             System.assertEquals(1, 0, 'Expected to recieve error');
         }catch(DMLException unexpectedException){
             System.assertEquals(unexpectedException.getDmlMessage(0), 'Capacity is full');
@@ -30,11 +30,10 @@ private class SalesTriggerHandlerTest {
         System.assertEquals(0, opportunityUpdated.CurrentSalesItemsNumber__c);
     }
 
-    @isTest static void testDeleteSales(){
+    @isTest static void deleteSales_test(){
         List<Opportunity> listOpportunities = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity LIMIT 1];
-        System.assertEquals(TestDataFactory.DEFAULT_SALES_ITEMS_CAPACITY, listOpportunities.get(0).Sales_Items_Capacity__c);
-        System.assertEquals(0, listOpportunities.get(0).CurrentSalesItemsNumber__c);
-        List<Sales__c> listSales = TestDataFactory.createSales(1, listOpportunities.get(0).Id, true);
+        List<Sales__c> listSales = TestDataFactory.createSales(1, listOpportunities.get(0).Id);
+        insert listSales;
         Opportunity opportunityUpdated = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity WHERE Id=:listOpportunities.get(0).Id];
         System.assertEquals(1, opportunityUpdated.CurrentSalesItemsNumber__c);
         Test.StartTest();
@@ -44,13 +43,10 @@ private class SalesTriggerHandlerTest {
         System.assertEquals(0, opportunityUpdated.CurrentSalesItemsNumber__c);
     }
 
-    @isTest static void testChangeParentOfSales(){
+    @isTest static void changeParentOfSales_test(){
         List<Opportunity> listOpportunities = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity LIMIT 2];
-        System.assertEquals(TestDataFactory.DEFAULT_SALES_ITEMS_CAPACITY, listOpportunities.get(0).Sales_Items_Capacity__c);
-        System.assertEquals(0, listOpportunities.get(0).CurrentSalesItemsNumber__c);
-        System.assertEquals(TestDataFactory.DEFAULT_SALES_ITEMS_CAPACITY, listOpportunities.get(1).Sales_Items_Capacity__c);
-        System.assertEquals(0, listOpportunities.get(1).CurrentSalesItemsNumber__c);
-        List<Sales__c> listSales = TestDataFactory.createSales(1, listOpportunities.get(0).Id, true);
+        List<Sales__c> listSales = TestDataFactory.createSales(1, listOpportunities.get(0).Id);
+        insert listSales;
         Opportunity opportunityUpdated = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity WHERE Id=:listOpportunities.get(0).Id];
         System.assertEquals(1, opportunityUpdated.CurrentSalesItemsNumber__c);
         listSales.get(0).Opportunity__c = listOpportunities.get(1).Id;
@@ -63,14 +59,12 @@ private class SalesTriggerHandlerTest {
         System.assertEquals(1, opportunityNew.CurrentSalesItemsNumber__c);
     }
 
-    @isTest static void testChangeParentOfSales_error(){
+    @isTest static void testChangeParentOfSales_negative(){
         List<Opportunity> listOpportunities = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity LIMIT 2];
-        System.assertEquals(TestDataFactory.DEFAULT_SALES_ITEMS_CAPACITY, listOpportunities.get(0).Sales_Items_Capacity__c);
-        System.assertEquals(0, listOpportunities.get(0).CurrentSalesItemsNumber__c);
-        System.assertEquals(TestDataFactory.DEFAULT_SALES_ITEMS_CAPACITY, listOpportunities.get(1).Sales_Items_Capacity__c);
-        System.assertEquals(0, listOpportunities.get(1).CurrentSalesItemsNumber__c);
-        List<Sales__c> listSales1 = TestDataFactory.createSales(3, listOpportunities.get(0).Id, true);
-        List<Sales__c> listSales2 = TestDataFactory.createSales(3, listOpportunities.get(1).Id, true);
+        List<Sales__c> listSales1 = TestDataFactory.createSales(3, listOpportunities.get(0).Id);
+        List<Sales__c> listSales2 = TestDataFactory.createSales(3, listOpportunities.get(1).Id);
+        insert listSales1;
+        insert listSales2;
         List<Opportunity> listOpportunitiesUpdated = [
             SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c 
             FROM Opportunity 
