@@ -29,7 +29,7 @@ public with sharing class AccountService {
             ];
         for(Opportunity opp: listOpportunities){
             opp.Name = String.format(
-                Label.OpportunityNameFormat, 
+                '{0}{1}{2}', 
                 new List<Object> {mapUpdatedNamesById.get(opp.AccountId), opp.CreatedDate.month(), opp.CreatedDate.year()}
             );
         }
