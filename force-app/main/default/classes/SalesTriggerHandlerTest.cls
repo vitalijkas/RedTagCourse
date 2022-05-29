@@ -1,8 +1,6 @@
 @isTest
 private class SalesTriggerHandlerTest {
-
     private static final Integer OBJECT_NUMBER = 3;
-
     @TestSetup static void testSetup(){
         insert TestDataFactory.createOpportunities(OBJECT_NUMBER);
     }
@@ -17,7 +15,7 @@ private class SalesTriggerHandlerTest {
         System.assertEquals(1, opportunityUpdated.CurrentSalesItemsNumber__c);
     }
 
-    @isTest static void testCreateSales_negative(){
+    @isTest static void createSales_testNegative(){
         List<Opportunity> listOpportunities = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity LIMIT 1];
         try{
             List<Sales__c> listSales = TestDataFactory.createSales(4, listOpportunities.get(0).Id);
@@ -59,7 +57,7 @@ private class SalesTriggerHandlerTest {
         System.assertEquals(1, opportunityNew.CurrentSalesItemsNumber__c);
     }
 
-    @isTest static void testChangeParentOfSales_negative(){
+    @isTest static void changeParentOfSales_testNegative(){
         List<Opportunity> listOpportunities = [SELECT Id,Name, CurrentSalesItemsNumber__c, Sales_Items_Capacity__c FROM Opportunity LIMIT 2];
         List<Sales__c> listSales1 = TestDataFactory.createSales(3, listOpportunities.get(0).Id);
         List<Sales__c> listSales2 = TestDataFactory.createSales(3, listOpportunities.get(1).Id);
