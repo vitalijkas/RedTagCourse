@@ -3,12 +3,11 @@ public with sharing class AccountService {
     public static void createOpportunities(List<Account> newAccountList){
         List<Opportunity> listOpportunities = new List<Opportunity>();
         for(Account acc: newAccountList){
-            Opportunity opp = new Opportunity(
-                AccountId = acc.Id,
-                Name = String.format('{0}{1}', new List<Object> {acc.Name, Datetime.now().format('yyyyMM')}),
-                StageName = 'Prospecting',
-                CloseDate = Date.today().addDays(90)
-            );
+            Opportunity opp = new Opportunity();
+            opp.AccountId = acc.Id;
+            opp.Name = String.format('{0}{1}', new List<Object> {acc.Name, Datetime.now().format('yyyyMM')});
+            opp.StageName = 'Prospecting';
+            opp.CloseDate = Date.today().addDays(90);
             listOpportunities.add(opp);
         }
         insert listOpportunities;
@@ -27,6 +26,7 @@ public with sharing class AccountService {
                 WHERE 
                 AccountId IN:mapUpdatedNamesById.keySet()
             ];
+
         for(Opportunity opp: listOpportunities){
             opp.Name = String.format(
                 '{0}{1}{2}', 
