@@ -1,13 +1,14 @@
 @isTest
 public class TestDataFactory {
     @TestVisible private static Integer DEFAULT_SALES_ITEMS_CAPACITY = 3;
+
     public static List<Account> createAccounts(Integer numOfAccounts){
         List<Account> testAccounts = new List<Account>();
-        for(Integer i=0;i<numOfAccounts;i++){
-            testAccounts.add(new Account(
-                Name='OkAccount'+i,
-                Account_level__c='Neutral'
-            ));
+        for(Integer i=0; i<numOfAccounts; i++){
+            Account acc = new Account();
+            acc.Name = 'OkAccount' + i;
+            acc.Account_level__c='Neutral';
+            testAccounts.add(acc);
         }
         return testAccounts;
     }
@@ -15,12 +16,12 @@ public class TestDataFactory {
     public static List<Opportunity> createOpportunities(Integer numOfOpportunities){
         List<Opportunity> testOpportunities = new List<Opportunity>();
         for(Integer i=0; i<numOfOpportunities; i++){
-            testOpportunities.add(new Opportunity(
-                Name='OkOpportunity'+i,
-                StageName='Prospecting',
-                CloseDate=Date.today(),
-                Sales_Items_Capacity__c=DEFAULT_SALES_ITEMS_CAPACITY
-            ));
+            Opportunity opp = new Opportunity();
+            opp.Name='OkOpportunity' + i;
+            opp.StageName='Prospecting';
+            opp.CloseDate=Date.today();
+            opp.Sales_Items_Capacity__c=DEFAULT_SALES_ITEMS_CAPACITY;
+            testOpportunities.add(opp);
         }
         return testOpportunities;
     }
@@ -28,10 +29,10 @@ public class TestDataFactory {
     public static List<Sales__c> createSales(Integer numOfSales, Id salesOwnerId){
         List<Sales__c> testSales = new List<Sales__c>();
         for(Integer i=0; i<numOfSales; i++){
-            testSales.add(new Sales__c(
-                Name='OkSales'+i,
-                Opportunity__c=salesOwnerId
-            ));
+            Sales__c sale = new Sales__c();
+            sale.Name='OkSales' + i;
+            sale.Opportunity__c=salesOwnerId;
+            testSales.add(sale);
         }
         return testSales;
     }
