@@ -28,10 +28,8 @@ public with sharing class ContractService {
             WHERE ContentDocumentId IN :mapContractIdsByDocumentId.keyset() AND IsLatest = true AND Document_Type__c = 'Contract'];
         Map<Id, Boolean> mapContractsValidated = new Map<Id, Boolean>();
         for(ContentVersion cv : contentVersion){
-            if(mapContractIdsByDocumentId.containskey(cv.ContentDocumentId)){
-                if(!mapContractsValidated.containskey(mapContractIdsByDocumentId.get(cv.ContentDocumentId))){
-                    mapContractsValidated.put(mapContractIdsByDocumentId.get(cv.ContentDocumentId), true);
-                }
+            if(!mapContractsValidated.containskey(mapContractIdsByDocumentId.get(cv.ContentDocumentId))){
+                mapContractsValidated.put(mapContractIdsByDocumentId.get(cv.ContentDocumentId), true);
             }
         }
         

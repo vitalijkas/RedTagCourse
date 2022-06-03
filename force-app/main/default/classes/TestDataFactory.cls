@@ -3,11 +3,11 @@ public class TestDataFactory {
     
     public static List<Account> createAccounts(Integer numOfAccounts){
         List<Account> testAccounts = new List<Account>();
-        for(Integer i=0;i<numOfAccounts;i++){
-            testAccounts.add(new Account(
-                Name='OkAccount'+i,
-                Account_level__c='Neutral'
-            ));
+        for(Integer i=0; i<numOfAccounts; i++){
+            Account acc = new Account();
+            acc.Name = 'OkAccount' + i;
+            acc.Account_level__c='Neutral';
+            testAccounts.add(acc);
         }
         return testAccounts;
     }
@@ -15,12 +15,12 @@ public class TestDataFactory {
     public static List<Contract> createContracts(Integer numOfContracts, List<Account> testAccounts){
         List<Contract> testContracts = new List<Contract>();
         for(Integer i=0;i<numOfContracts;i++){
-            testContracts.add(new Contract(
-                AccountId = testAccounts[i].Id,
-                ContractTerm = 12,
-                Status = 'Draft',
-                StartDate = Date.today()
-            ));
+            Contract ct = new Contract();
+            ct.AccountId = testAccounts[i].Id;
+            ct.ContractTerm = 12;
+            ct.Status = 'Draft';
+            ct.StartDate = Date.today();
+            testContracts.add(ct);
         }
         return testContracts;
     }
