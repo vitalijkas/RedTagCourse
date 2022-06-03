@@ -1,0 +1,120 @@
+<head>
+	<title> Contact us! </title>
+    <link rel="stylesheet" href="styles.css">
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+    <div class="form-style-5">
+		<legend>
+			<span class="number"> 1 </span> Contact us Form
+        </legend>
+		
+	    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+        <input type="hidden" name="oid" value="00D7R000003qHp9" />
+        <input type="hidden" name="retURL" value="https://www.youtube.com/watch?v=irzOMH7GcnQ" />
+
+        <label for="first_name">First Name</label>
+		<input id="first_name" maxlength="40" name="first_name" size="20" type="text" required/><br />
+
+        <label for="last_name">Last Name</label>
+		<input id="last_name" maxlength="80" name="last_name" size="20" type="text" required/><br />
+
+        <label for="phone">Phone</label>
+		<input pattern="\d*" title="Numbers only, please." id="phone" minlength="12" maxlength="12" name="phone" size="20" type="text" required/><br />
+
+        <label for="email">Email</label>
+		<input id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="80" name="email" size="20" type="text" required/><br />
+
+        Product:
+        <select id="00N7R00000CulFg" name="00N7R00000CulFg" title="Product" required>
+            <option value="">--None--</option>
+            <option value="Product 1">Product 1</option>
+            <option value="Product 2">Product 2</option>
+            <option value="Product 3">Product 3</option>
+        </select>
+        <br />
+		Question:
+		<br />
+        <textarea id="00N7R00000CulFlUAJ" name="00N7R00000CulFlUAJ" rows="15" type="text" wrap="soft"></textarea>
+        <script>
+            CKEDITOR.timestamp = "4.16.2.4";
+            var protocolAndHost = window.location.protocol + "//" + window.location.host;
+
+            var editor = CKEDITOR.replace("00N7R00000CulFlUAJ", {
+                removePlugins: "elementspath,maximize,image,tabletools,liststyle,contextmenu,resize",
+                baseHref: protocolAndHost + "/ckeditor/ckeditor-4.x/rel/",
+                customConfig: "/ckeditor/ckeditor-4.x/rel/sfdc-config.js",
+                height: "425",
+                bodyId: "00N7R00000CulFlUAJ_rta_body",
+                toolbar: "SalesforceBasic",
+                sfdcLabels: {
+                    CkeLineHeight: { singleValue: "Single", doubleValue: "Double", title: "Line Height", secondValue: "1.15", thirdValue: "1.5" },
+                    CkeQuickText: { title: "Insert quick text" },
+                    CkeMediaEmbed: {
+                        iframeMissing: "Invalid &lt;iframe&gt; element. Please use valid code from the approved sites.",
+                        subtitle: "Paste &amp;lt;iframe&amp;gt; code here:",
+                        description: "Use &lt;iframe&gt; code from an approved video source.",
+                        title: "Embed Multimedia Content",
+                        exampleTitle: "Example:",
+                        example:
+                            "\n            \n                &lt;iframe width=\&quot;560\&quot; height=\&quot;315\&quot; src=\&quot;https://www.youtube.com/embed/KcOm0TNvKBA\&quot; frameborder=\&quot;0\&quot; allowfullscreen&gt;&lt;/iframe&gt;\n            \n        ",
+                    },
+                    CkeImageMenu: { uploadFile: " Browse or Upload", uploadCms: "Salesforce CMS", pasteUrl: "Paste Image URL", uploadUrl: "Web Image", uploadSFFile: "Salesforce Files", title: "Insert images into your message" },
+                    CkeImagePaste: { CkeImagePasteWarning: "Pasting an image is not working properly with Firefox, please use [Copy Image location] instead." },
+                    CkeImageDialog: {
+                        infoTab_desc_info: "Enter a description of the image for visually impaired users",
+                        uploadTab_desc: "Description",
+                        defaultImageDescription: "User-added image",
+                        uploadTab_file_info: "Maximum size 1 MB. Only PNG, GIF or JPEG",
+                        uploadTab_desc_info: "Enter a description of the image for visually impaired users",
+                        imageUploadLimit_info: "Max number of upload images exceeded",
+                        btn_insert_tooltip: "Insert Image",
+                        httpUrlWarning: "Are you sure you want to use an http URL? Using http image URLs may result in security warnings about insecure content. To avoid these warnings, use https image URLs instead.",
+                        title: "Insert Image",
+                        error: "Error:",
+                        uploadTab: "Upload Image",
+                        wrongFileTypeError: "You can insert only .gif .jpeg and .png files.",
+                        infoTab_url: "URL",
+                        infoTab: "Web Address",
+                        infoTab_url_info: "Example: http://www.mysite.com/myimage.jpg",
+                        missingUrlError: "You must enter a URL",
+                        uploadTab_file: "Select Image",
+                        btn_update_tooltip: "Update Image",
+                        infoTab_desc: "Description",
+                        btn_insert: "Insert",
+                        btn_update: "Update",
+                        btn_upadte: "Update",
+                        invalidUrlError: "You can only use http:, https:, data:, //, /, or relative URL schemes.",
+                    },
+                    sfdcSwitchToText: { sfdcSwitchToTextAlt: "Use plain text" },
+                    CkeSmartLink: { title: "Insert a Smart Link", SmartLinkContextMenuEdit: "Edit Smart Link" },
+                },
+                contentsCss: ["/ckeditor/ckeditor-4.x/rel/contents.css", "/sCSS/54.0/sprites/1641822910000/Theme3/default/gc/CKEditor.css", "/sCSS/54.0/sprites/1641822910000/Theme3/default/gc/HtmlDetailElem.css"],
+                disableNativeSpellChecker: false,
+                language: "en-US",
+                allowIframe: false,
+                isPardotOrg: false,
+                isCmsOnly: false,
+                sharedSpaces: { top: "cke_topSpace", bottom: " cke_bottomSpace" },
+                filebrowserImageUploadUrl: "/_ui/common/request/servlet/RtaImageUploadServlet?_CONFIRMATIONTOKEN=VmpFPSxNakF5TWkwd05TMHlNRlF4T1RvMU56bzBOaTQyTkRWYSw3ZmY5TGpOSzFCRlZpTTZuWHpwcFdNLE5HRm1NemMy",
+                extraPlugins: "sfdcImage,sfdcMediaEmbed,sfdcSmartLink,sfdcCodeBlock,sfdcVfAjax4J,sfdcLineHeight,sfdcQuickText",
+            });
+
+            editor.on("instanceReady", function (evt) {
+                try {
+                    var id = evt.editor.name;
+                    CKiframe = document.getElementById("cke_" + id).querySelector("iframe");
+                    meta = document.createElement("meta");
+                    meta.setAttribute("name", "referrer");
+                    meta.setAttribute("content", "no-referrer");
+                    CKiframe.contentDocument.head.appendChild(meta);
+                } catch (e) {}
+            });
+        </script>
+        <br />
+
+        <input type="submit" name="submit" />
+    </form>
+    </div>
+</body>

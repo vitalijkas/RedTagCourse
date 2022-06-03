@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignmentRule>
+        <fullName>Standart</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <assignedTo>Red_Tag_Website_Leads</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Lead.Question__c</field>
+                <operation>equals</operation>
+                <value>Ok</value>
+            </criteriaItems>
+        </ruleEntry>
+    </assignmentRule>
+</AssignmentRules>
