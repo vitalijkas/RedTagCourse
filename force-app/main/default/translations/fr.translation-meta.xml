@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
+        <label><!-- Opportunity Name Format --></label>
+        <name>OpportunityNameFormat</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Format Opportunities for Email --></label>
+        <name>myOppFormatLabel</name>
+    </customLabels>
+    <customLabels>
         <label><!-- tt_BaseURL --></label>
         <name>trlhdtips__tt_BaseURL</name>
     </customLabels>

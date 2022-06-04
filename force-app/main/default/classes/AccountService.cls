@@ -1,65 +1,81 @@
 public with sharing class AccountService {
     
-    public static void createOpportunities(List<Account> newAccs){
-        List<Opportunity> opList = new List<Opportunity>();
-        for(Account acc: newAccs){
-            Opportunity op = new Opportunity(
-                AccountId = acc.Id,
-                Name = acc.Name + Date.today().month() + Date.today().year(),
-                StageName = 'Prospecting',
-                CloseDate = Date.today() + 90
-            );
-            opList.add(op);
+    public static void createOpportunities(List<Account> newAccountList){
+        List<Opportunity> listOpportunities = new List<Opportunity>();
+        for(Account acc: newAccountList){
+            Opportunity opp = new Opportunity();
+            opp.AccountId = acc.Id;
+            opp.Name = String.format('{0}{1}', new List<Object> {acc.Name, Datetime.now().format('yyyyMM')});
+            opp.StageName = 'Prospecting';
+            opp.CloseDate = Date.today().addDays(90);
+            listOpportunities.add(opp);
         }
-        insert opList;
+        insert listOpportunities;
     }
-    public static void updateOpportunities(List<Account> newAccs, Map<Id, Account> mapOldAccs){
+
+    public static void updateOpportunities(List<Account> newAccountList, Map<Id, Account> mapOldAccounts){
         Map<Id, String> mapUpdatedNamesById = new Map<Id, String>();
-        for(Account acc: newAccs){
-            if(acc.Name != mapOldAccs.get(acc.Id).Name){
+        for(Account acc: newAccountList){
+            if(acc.Name != mapOldAccounts.get(acc.Id).Name){
                     mapUpdatedNamesById.put(acc.Id, acc.Name);
             }
         }
-        List<Opportunity> opps = [SELECT Id, Name, AccountId, CreatedDate FROM Opportunity WHERE AccountId IN:mapUpdatedNamesById.keySet()];
-        for(Opportunity op: opps){
-            op.Name = mapUpdatedNamesById.get(op.AccountId) + op.CreatedDate.month() + op.CreatedDate.year();
-        }
-        update opps;
-    }
-    public static void deleteOpportunities(Map<Id, Account> mapOldAccs){
-        List<Opportunity> oppToDelete = [SELECT Id, Name, AccountId, Account.Owner.Name, Account.Owner.Email FROM Opportunity WHERE AccountId IN:mapOldAccs.keySet()];
-        Map<Id, User> mapOwners = new Map<Id, User>();
-        Map<Id, List<Opportunity>> mapOpByAccount = new Map<Id, List<Opportunity>>();
-        for(Opportunity op: oppToDelete){
-            if(!mapOpByAccount.containsKey(op.AccountId)){
-                mapOpByAccount.put(op.AccountId, new List<Opportunity>());
-            }
-            mapOpByAccount.get(op.AccountId).add(op);
+        List<Opportunity> listOpportunities = [
+                SELECT Id, Name, AccountId, CreatedDate 
+                FROM Opportunity 
+                WHERE 
+                AccountId IN:mapUpdatedNamesById.keySet()
+            ];
 
+        for(Opportunity opp: listOpportunities){
+            opp.Name = String.format(
+                '{0}{1}{2}', 
+                new List<Object> {mapUpdatedNamesById.get(opp.AccountId), opp.CreatedDate.month(), opp.CreatedDate.year()}
+            );
+        }
+        update listOpportunities;
+    }
+    
+    public static void deleteOpportunities(List<Account> listOldAccounts){
+        List<Opportunity> oppToDelete = [
+            SELECT Id, Name, AccountId, Account.Owner.Name, Account.Owner.Email 
+            FROM Opportunity 
+            WHERE AccountId IN:listOldAccounts
+        ];
+        Map<Id, User> mapOwners = new Map<Id, User>();
+        Map<Id, List<String>> mapOppsToSendByAccount = new Map<Id, List<String>>();
+
+        for(Opportunity op: oppToDelete){
             if(!mapOwners.containsKey(op.AccountId)){
                 mapOwners.put(op.AccountId, op.Account.Owner);
             }
+
+            if(!mapOppsToSendByAccount.containsKey(op.AccountId)){
+                mapOppsToSendByAccount.put(op.AccountId, new List<String>());
+            }
+            mapOppsToSendByAccount.get(op.AccountId).add(
+                String.format(
+                    '{0}. {1}, {2}',  
+                    new List<Object> {mapOppsToSendByAccount.get(op.AccountId).size() + 1, op.Id, op.Name}
+                )
+            );
         }
+
         EmailTemplate emailTemplate = [SELECT Id, Subject, Body FROM EmailTemplate WHERE DeveloperName = 'Send_Deleted_Opps_on_Account_delete'];
         List<Messaging.SingleEmailMessage> listEmails = new List<Messaging.SingleEmailMessage>();
-        for(Id accountId: mapOpByAccount.keySet()){
-            Integer counter = 0;
-            String stringOps = '';
-            String[] toAddresses = new String[] {mapOwners.get(accountId).Email}; 
+        for(Account acc: listOldAccounts){
+            String[] toAddresses = new String[] {mapOwners.get(acc.Id).Email}; 
             Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
             String plainBody = emailTemplate.Body;
-            for(Opportunity op: mapOpByAccount.get(accountId)){
-                counter += 1;
-                stringOps += String.valueOf(counter) + '. ' + op.Id + ', ' + op.Name + '\n';
-            }
-            plainBody = plainBody.replace('{UserName}', mapOwners.get(accountId).Name);
-            plainBody = plainBody.replace('{AccountName}', mapOldAccs.get(accountId).Name);
-            plainBody = plainBody.replace('{oppList}', stringOps);
+            plainBody = plainBody.replace('{UserName}', mapOwners.get(acc.Id).Name);
+            plainBody = plainBody.replace('{AccountName}', acc.Name);
+            plainBody = plainBody.replace('{opportunityList}', String.join(mapOppsToSendByAccount.get(acc.Id), '\n'));
             email.setToAddresses(toAddresses);
             email.setSubject(emailTemplate.Subject);
             email.setPlainTextBody(plainBody);
             listEmails.add(email);
         }
+
         Messaging.sendEmail(listEmails);
         delete oppToDelete;
     }
