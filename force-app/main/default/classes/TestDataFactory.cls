@@ -13,6 +13,39 @@ public class TestDataFactory {
         return testAccounts;
     }
 
+    public static List<Contract> createContracts(Integer numOfContracts, List<Account> testAccounts){
+        List<Contract> testContracts = new List<Contract>();
+        for(Integer i=0;i<numOfContracts;i++){
+            Contract ct = new Contract();
+            ct.AccountId = testAccounts[i].Id;
+            ct.ContractTerm = 12;
+            ct.Status = 'Draft';
+            ct.StartDate = Date.today();
+            testContracts.add(ct);
+        }
+        return testContracts;
+    }
+
+    public static ContentVersion createContentVersion(){
+        ContentVersion contentVersion = new ContentVersion();
+        Blob body = Blob.valueof('lala');
+        contentVersion.ContentLocation = 'S';
+        contentVersion.PathOnClient = 'Document.txt';
+        contentVersion.Title = 'Document';
+        contentVersion.VersionData = body;
+        contentVersion.Document_Type__c = 'Contract';
+        return contentVersion;
+    }
+
+    public static ContentDocumentLink createContentDocumentLink(Id accountId, Id contentDocumentId){
+        ContentDocumentLink contentDocumentLink = new ContentDocumentLink();
+        contentDocumentLink.ContentDocumentId = contentDocumentId;
+        contentDocumentLink.LinkedEntityId = accountId;
+        contentDocumentLink.ShareType = 'I';
+        contentDocumentLink.Visibility = 'AllUsers';
+        return contentDocumentLink;
+    }
+
     public static List<Opportunity> createOpportunities(Integer numOfOpportunities){
         List<Opportunity> testOpportunities = new List<Opportunity>();
         for(Integer i=0; i<numOfOpportunities; i++){
