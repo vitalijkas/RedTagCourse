@@ -3,14 +3,14 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSubjectPicklistValues from '@salesforce/apex/CreateCampaignTaskController.getSubjectPicklistValues'
 import saveTask from '@salesforce/apex/CreateCampaignTaskController.saveTask'
 
-
 export default class CreateCampaignTask extends LightningElement {
     @api recordId;
+    @track subjectOptions = [];
     subjectValue;
     dateValue;
     description;
     userId;
-    @track subjectOptions = [];
+    
     connectedCallback(){
         getSubjectPicklistValues()
             .then((result) => {
@@ -44,7 +44,6 @@ export default class CreateCampaignTask extends LightningElement {
                 inputField.reportValidity();
                 isValid = false;
             }
-        
         });
         this.template.querySelectorAll('lightning-input-field').forEach(element => {
             if (element.fieldName === 'DelegatedApproverId') {
@@ -58,7 +57,6 @@ export default class CreateCampaignTask extends LightningElement {
     }
 
     addTask() {
-        
         if(this.isInputValid()){
             saveTask({subject: this.subjectValue, activityDate: this.dateValue, description: this.description, campaignId: this.recordId, userId: this.userId})
             .then(() => {
@@ -69,10 +67,6 @@ export default class CreateCampaignTask extends LightningElement {
                         variant: 'success'
                     })
                 );
-                this.subjectValue = '';
-                this.dateValue = '';
-                this.description = '';
-                this.userId = '';
                 this.dispatchEvent(new CustomEvent('close'));
             })
             .catch((error) => {
@@ -86,5 +80,4 @@ export default class CreateCampaignTask extends LightningElement {
             });
         }
     }
-
 }

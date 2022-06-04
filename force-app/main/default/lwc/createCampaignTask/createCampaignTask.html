@@ -1,14 +1,7 @@
 <template>
     <lightning-card title="Add Task">
         <div class="slds-card slds-p-arround_small" style="margin: 20px">
-            <lightning-combobox
-                class="validate"
-                label="Subject"
-                placeholder="Select Subject"
-                options={subjectOptions}
-                onchange={handleChangeSubject}
-                required
-            ></lightning-combobox>
+            <lightning-combobox class="validate" label="Subject" placeholder="Select Subject" options={subjectOptions} onchange={handleChangeSubject} required></lightning-combobox>
             <lightning-input type="date" class="validate" label="Due Date" onchange={handleChangeDate} required></lightning-input>
             <lightning-textarea label="Enter description" class="validate" onchange={handleChangeDescription} required></lightning-textarea>
             <lightning-record-edit-form object-api-name="User" onchange={editChangeUserId}>
