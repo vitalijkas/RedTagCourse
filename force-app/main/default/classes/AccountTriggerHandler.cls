@@ -1,14 +1,15 @@
-public with sharing class AccountTriggerHandler {
-    public static void run(){
-        if(Trigger.isAfter && Trigger.isInsert){
-            AccountService.createOpportunities(Trigger.new);
-        }
-        if(Trigger.isAfter && Trigger.isUpdate){
-            AccountService.updateOpportunities((List<Account>) Trigger.new, (Map<Id, Account>) Trigger.oldMap);
-        }
-        if(Trigger.isBefore && Trigger.isDelete){
-            AccountService.deleteOpportunities((Map<Id, Account>) Trigger.oldMap);
-        }
+public with sharing class AccountTriggerHandler extends TriggerHandler{
+ 
+    public override void afterInsert(){
+        AccountService.createOpportunities(Trigger.new);
+    }
+
+    public override void afterUpdate(){
+        AccountService.updateOpportunities((List<Account>) Trigger.new, (Map<Id, Account>) Trigger.oldMap);
+    }
+
+    public override void beforeDelete(){
+        AccountService.deleteOpportunities((List<Account>) Trigger.old);
     }
     
 }
