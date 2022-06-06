@@ -13,6 +13,35 @@ public class TestDataFactory {
         return testAccounts;
     }
 
+    public static List<Contact> createContacts(Integer numOfContacts){
+        List<Contact> testContacts = new List<Contact>();
+        for(Integer i=0; i<numOfContacts; i++){
+            Contact cont = new Contact();
+            cont.FirstName = 'OkAccount' + i;
+            cont.LastName = 'OkLast' + i;
+            testContacts.add(cont);
+        }
+        return testContacts;
+    }
+
+    public static List<User> createUsers(Integer numOfUsers, Id profileId){
+        List<User> testUsers = new List<User>();
+        for(Integer i=0; i<numOfUsers; i++){
+            User u = new User();
+            u.Alias = 'standt';
+            u.Email = 'testuserx' + i + '@testorg.com';
+            u.EmailEncodingKey = 'UTF-8';
+            u.LastName = 'Test';
+            u.LanguageLocaleKey = 'en_US';
+            u.LocaleSidKey='en_US';
+            u.ProfileId = profileId;
+            u.TimeZoneSidKey='America/Los_Angeles';
+            u.UserName='testuserx' + i + '@testorg.com';
+            testUsers.add(u);
+        }
+        return testUsers;
+    }
+
     public static List<Contract> createContracts(Integer numOfContracts, List<Account> testAccounts){
         List<Contract> testContracts = new List<Contract>();
         for(Integer i=0;i<numOfContracts;i++){
