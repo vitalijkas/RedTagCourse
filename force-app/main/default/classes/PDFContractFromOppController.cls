@@ -22,6 +22,7 @@ public class PDFContractFromOppController {
                 labelFrontPageFormattedText = System.Label.pdfFrontPageText.replace('{custmer}', customer).replace('{seller company}', seller_company);
             }
         }
+        
         sumOfQuantity = 0;
         sumOfPrice = 0;
         for(OpportunityLineItem p : products){
