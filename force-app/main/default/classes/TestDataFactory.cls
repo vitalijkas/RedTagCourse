@@ -27,17 +27,17 @@ public class TestDataFactory {
     public static List<User> createUsers(Integer numOfUsers, Id profileId){
         List<User> testUsers = new List<User>();
         for(Integer i=0; i<numOfUsers; i++){
-            User u = new User();
-            u.Alias = 'standt';
-            u.Email = 'testuserx' + i + '@testorg.com';
-            u.EmailEncodingKey = 'UTF-8';
-            u.LastName = 'Test';
-            u.LanguageLocaleKey = 'en_US';
-            u.LocaleSidKey='en_US';
-            u.ProfileId = profileId;
-            u.TimeZoneSidKey='America/Los_Angeles';
-            u.UserName='testuserx' + i + '@testorg.com';
-            testUsers.add(u);
+            User user = new User();
+            user.Alias = 'standt';
+            user.Email = 'testuserx' + i + '@testorg.com';
+            user.EmailEncodingKey = 'UTF-8';
+            user.LastName = 'Test';
+            user.LanguageLocaleKey = 'en_US';
+            user.LocaleSidKey='en_US';
+            user.ProfileId = profileId;
+            user.TimeZoneSidKey='America/Los_Angeles';
+            user.UserName='testuserx' + i + '@testorg.com';
+            testUsers.add(user);
         }
         return testUsers;
     }
