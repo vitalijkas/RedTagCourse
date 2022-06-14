@@ -1,0 +1,7 @@
+.form-style{
+    width: 500px;
+    margin-left: 35%;
+}
+.form-style > button{
+    margin-top: 10px;
+}

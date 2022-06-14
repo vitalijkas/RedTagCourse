@@ -2,20 +2,43 @@
 public class TestDataFactory {
     @TestVisible private static Integer DEFAULT_SALES_ITEMS_CAPACITY = 3;
     
+    public static List<Weather_Setting__c> createWeatherSetting(Integer numOfWeatherSettings, String city, String language){
+        List<Weather_Setting__c> testWeatherSettings = new List<Weather_Setting__c>();
+        for(Integer i=0; i<numOfWeatherSettings; i++){
+            Weather_Setting__c weatherSetting = new Weather_Setting__c();
+            weatherSetting.Name = 'Weather setting for ' + city;
+            weatherSetting.CityName__c = city;
+            weatherSetting.Language__c = language;
+            testWeatherSettings.add(weatherSetting);
+        }
+        return testWeatherSettings;
+    }
+
+    public static List<Weather__c> createWeathers(Integer numOfWeathers, String city){
+        List<Weather__c> testWeathers = new List<Weather__c>();
+        for(Integer i=0; i<numOfWeathers; i++){
+            Weather__c weather = new Weather__c();
+            weather.Name = 'Weather setting for ' + city;
+            weather.CityName__c = city;
+            testWeathers.add(weather);
+        }
+        return testWeathers;
+    }
+
     public static List<User> createUsers(Integer numOfUsers, Id profileId){
         List<User> testUsers = new List<User>();
         for(Integer i=0; i<numOfUsers; i++){
-            User u = new User();
-            u.Alias = 'standt';
-            u.Email = 'testuserx' + i + '@testorg.com';
-            u.EmailEncodingKey = 'UTF-8';
-            u.LastName = 'Test';
-            u.LanguageLocaleKey = 'en_US';
-            u.LocaleSidKey='en_US';
-            u.ProfileId = profileId;
-            u.TimeZoneSidKey='America/Los_Angeles';
-            u.UserName='testuserx' + i + '@testorg.com';
-            testUsers.add(u);
+            User user = new User();
+            user.Alias = 'standt';
+            user.Email = 'testuserx' + i + '@testorg.com';
+            user.EmailEncodingKey = 'UTF-8';
+            user.LastName = 'Test';
+            user.LanguageLocaleKey = 'en_US';
+            user.LocaleSidKey='en_US';
+            user.ProfileId = profileId;
+            user.TimeZoneSidKey='America/Los_Angeles';
+            user.UserName='testuserx' + i + '@testorg.com';
+            testUsers.add(user);
         }
         return testUsers;
     }
@@ -29,7 +52,7 @@ public class TestDataFactory {
         }
         return testCampaigns;
     }
-}
+
 
     public static List<Account> createAccounts(Integer numOfAccounts){
         List<Account> testAccounts = new List<Account>();
