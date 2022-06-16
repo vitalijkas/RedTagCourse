@@ -5,10 +5,10 @@ public class TestDataFactory {
     public static List<Account> createAccounts(Integer numOfAccounts){
         List<Account> testAccounts = new List<Account>();
         for(Integer i=0; i<numOfAccounts; i++){
-            Account acc = new Account();
-            acc.Name = 'OkAccount' + i;
-            acc.Account_level__c='Neutral';
-            testAccounts.add(acc);
+            Account testAccount = new Account();
+            testAccount.Name = 'OkAccount' + i;
+            testAccount.Account_level__c='Neutral';
+            testAccounts.add(testAccount);
         }
         return testAccounts;
     }
@@ -16,10 +16,10 @@ public class TestDataFactory {
     public static List<Contact> createContacts(Integer numOfContacts){
         List<Contact> testContacts = new List<Contact>();
         for(Integer i=0; i<numOfContacts; i++){
-            Contact cont = new Contact();
-            cont.FirstName = 'OkAccount' + i;
-            cont.LastName = 'OkLast' + i;
-            testContacts.add(cont);
+            Contact testContact = new Contact();
+            testContact.FirstName = 'OkAccount' + i;
+            testContact.LastName = 'OkLast' + i;
+            testContacts.add(testContact);
         }
         return testContacts;
     }
@@ -27,17 +27,17 @@ public class TestDataFactory {
     public static List<User> createUsers(Integer numOfUsers, Id profileId){
         List<User> testUsers = new List<User>();
         for(Integer i=0; i<numOfUsers; i++){
-            User user = new User();
-            user.Alias = 'standt';
-            user.Email = 'testuserx' + i + '@testorg.com';
-            user.EmailEncodingKey = 'UTF-8';
-            user.LastName = 'Test';
-            user.LanguageLocaleKey = 'en_US';
-            user.LocaleSidKey='en_US';
-            user.ProfileId = profileId;
-            user.TimeZoneSidKey='America/Los_Angeles';
-            user.UserName='testuserx' + i + '@testorg.com';
-            testUsers.add(user);
+            User testUser = new User();
+            testUser.Alias = 'standt';
+            testUser.Email = 'testuserx' + i + '@testorg.com';
+            testUser.EmailEncodingKey = 'UTF-8';
+            testUser.LastName = 'Test';
+            testUser.LanguageLocaleKey = 'en_US';
+            testUser.LocaleSidKey='en_US';
+            testUser.ProfileId = profileId;
+            testUser.TimeZoneSidKey='America/Los_Angeles';
+            testUser.UserName='testuserx' + i + '@testorg.com';
+            testUsers.add(testUser);
         }
         return testUsers;
     }
@@ -45,12 +45,12 @@ public class TestDataFactory {
     public static List<Contract> createContracts(Integer numOfContracts, List<Account> testAccounts){
         List<Contract> testContracts = new List<Contract>();
         for(Integer i=0;i<numOfContracts;i++){
-            Contract ct = new Contract();
-            ct.AccountId = testAccounts[i].Id;
-            ct.ContractTerm = 12;
-            ct.Status = 'Draft';
-            ct.StartDate = Date.today();
-            testContracts.add(ct);
+            Contract testContract = new Contract();
+            testContract.AccountId = testAccounts[i].Id;
+            testContract.ContractTerm = 12;
+            testContract.Status = 'Draft';
+            testContract.StartDate = Date.today();
+            testContracts.add(testContract);
         }
         return testContracts;
     }
@@ -78,12 +78,12 @@ public class TestDataFactory {
     public static List<Opportunity> createOpportunities(Integer numOfOpportunities){
         List<Opportunity> testOpportunities = new List<Opportunity>();
         for(Integer i=0; i<numOfOpportunities; i++){
-            Opportunity opp = new Opportunity();
-            opp.Name='OkOpportunity' + i;
-            opp.StageName='Prospecting';
-            opp.CloseDate=Date.today();
-            opp.Sales_Items_Capacity__c=DEFAULT_SALES_ITEMS_CAPACITY;
-            testOpportunities.add(opp);
+            Opportunity testOpportunity = new Opportunity();
+            testOpportunity.Name='OkOpportunity' + i;
+            testOpportunity.StageName='Prospecting';
+            testOpportunity.CloseDate=Date.today();
+            testOpportunity.Sales_Items_Capacity__c=DEFAULT_SALES_ITEMS_CAPACITY;
+            testOpportunities.add(testOpportunity);
         }
         return testOpportunities;
     }
