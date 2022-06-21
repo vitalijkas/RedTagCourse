@@ -12,7 +12,7 @@ public class PDFContractFromOppController {
         opportunityRecord = [SELECT Id, ContractId FROM Opportunity WHERE Id =: opportunityRecord.Id];
         products = [SELECT Product2Id, Quantity, UnitPrice FROM OpportunityLineItem WHERE OpportunityId =: opportunityRecord.Id];
 
-        if(opportunityRecord.ContractId != null){
+        if(String.isNotBlank(opportunityRecord.ContractId)){
             Contract contractRecord = [SELECT CompanySignedId, CustomerSignedId FROM Contract WHERE Id =: opportunityRecord.ContractId];
             if(contract.CustomerSignedId != null || contract.CompanySignedId != null){
                 Contact contractName = [SELECT Name FROM Contact WHERE Id =: contractRecord.CustomerSignedId];
