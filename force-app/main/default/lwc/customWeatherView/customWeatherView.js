@@ -1,26 +1,27 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement } from 'lwc';
 import getWeather from '@salesforce/apex/CustomWeatherViewController.getWeather';
-import { loadStyle } from 'lightning/platformResourceLoader';
-import stylesCustomWeatherView from '@salesforce/resourceUrl/stylesCustomWeatherView';
+import { labels } from 'c/labelUtility';
 
 export default class CustomWeatherView extends LightningElement {
-    @api label;
+    label = labels;
     data = [];
     columns = [
-        {label: 'City', fieldName:'CityName', cellAttributes: { iconName: { fieldName: 'cityIcon' }}},
-        {label: 'Date', fieldName:'Date', cellAttributes: { class: 'column-styled'}},
-        {label: 'Temperature', fieldName:'Temperature', cellAttributes: { class: 'column-styled'}},
-        {label: 'Feels like', fieldName:'FeelsLike', cellAttributes: { class: 'column-styled'}},
-        {label: 'Pressure', fieldName:'Pressure', cellAttributes: { class: 'column-styled'}},
-        {label: 'Wind speed', fieldName:'WindSpeed', cellAttributes: { class: 'column-styled'}},
-        {label: 'Humidity', fieldName:'Humidity', cellAttributes: { class: 'column-styled'}},
-        {label: 'Location', fieldName:'Location', type:'Location', cellAttributes: { class: 'column-styled'}},
-        {label: 'Description', fieldName:'Description', cellAttributes: { class: 'column-styled'}}
+        {label: this.label.city, fieldName:'CityName', cellAttributes: { iconName: { fieldName: 'cityIcon' }}},
+        {label: this.label.date, fieldName:'Date'},
+        {label: this.label.temperature, fieldName:'Temperature'},
+        {label: this.label.feelsLike, fieldName:'FeelsLike'},
+        {label: this.label.pressure, fieldName:'Pressure'},
+        {label: this.label.windSpeed, fieldName:'WindSpeed'},
+        {label: this.label.humidity, fieldName:'Humidity'},
+        {label: this.label.location, fieldName:'Location', type:'location'},
+        {label: this.label.description, fieldName:'Description'}
+    ];
+    
+    connectedCallback(){
+        this.populateWeatherRecords();
+    }
 
-    ]
-
-    async connectedCallback(){
-        loadStyle(this, stylesCustomWeatherView);
+    populateWeatherRecords(){
         getWeather().then(result => {
             this.data = result.map(weather => {
                 return {

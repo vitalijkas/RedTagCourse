@@ -3,19 +3,19 @@ public with sharing class WeatherService {
     public static void updateWeather(){
         List<Weather_Setting__c> weatherSettingsList = [SELECT Id, CityName__c, Language__c FROM Weather_Setting__c];
         if(weatherSettingsList.isEmpty() || weatherSettingsList.size() > 1){
-            throw new CustomException('Weather setting size is inappropriate. Size = ' + weatherSettings.size());
+            throw new WeatherException('Weather setting size is inappropriate. Size = ' + weatherSettingsList.size());
         }
 
         HttpResponse resp = WeatherApi.getWeather(weatherSettingsList[0].CityName__c);
         if(resp.getStatusCode() != 200){
-            throw new CustomException('Http request error. Response StatusCode = ' + resp.getStatusCode());
+            throw new WeatherException('Http request error. Response StatusCode = ' + resp.getStatusCode());
         }
         
         WeatherAPIWrappers.GetWeatherResponse respWrapper = 
             (WeatherAPIWrappers.GetWeatherResponse) System.JSON.deserialize(resp.getBody(), WeatherAPIWrappers.GetWeatherResponse.class);
 
         Weather__c weatherToInsert = new Weather__c();
-        weatherToInsert.Name = 'Weaher for ' + respWrapper.name;
+        weatherToInsert.Name = String.format(System.Label.Weather_Name, new List<Object> {respWrapper.name});
         weatherToInsert.CityName__c = respWrapper.name;
         weatherToInsert.Humidity__c = respWrapper.main.humidity;
         weatherToInsert.Pressure__c = respWrapper.main.pressure;
@@ -30,5 +30,5 @@ public with sharing class WeatherService {
         insert weatherToInsert;
     }
 
-    public class CustomException extends Exception{}
+    public class WeatherException extends Exception{}
 }

@@ -5,11 +5,11 @@ public class TestDataFactory {
     public static List<Weather_Setting__c> createWeatherSetting(Integer numOfWeatherSettings, String city, String language){
         List<Weather_Setting__c> testWeatherSettings = new List<Weather_Setting__c>();
         for(Integer i=0; i<numOfWeatherSettings; i++){
-            Weather_Setting__c weatherSetting = new Weather_Setting__c();
-            weatherSetting.Name = 'Weather setting for ' + city;
-            weatherSetting.CityName__c = city;
-            weatherSetting.Language__c = language;
-            testWeatherSettings.add(weatherSetting);
+            Weather_Setting__c testWeatherSetting = new Weather_Setting__c();
+            testWeatherSetting.Name = 'Weather setting for ' + city;
+            testWeatherSetting.CityName__c = city;
+            testWeatherSetting.Language__c = language;
+            testWeatherSettings.add(testWeatherSetting);
         }
         return testWeatherSettings;
     }
@@ -17,10 +17,10 @@ public class TestDataFactory {
     public static List<Weather__c> createWeathers(Integer numOfWeathers, String city){
         List<Weather__c> testWeathers = new List<Weather__c>();
         for(Integer i=0; i<numOfWeathers; i++){
-            Weather__c weather = new Weather__c();
-            weather.Name = 'Weather setting for ' + city;
-            weather.CityName__c = city;
-            testWeathers.add(weather);
+            Weather__c testWeather = new Weather__c();
+            testWeather.Name = 'Weather setting for ' + city;
+            testWeather.CityName__c = city;
+            testWeathers.add(testWeather);
         }
         return testWeathers;
     }
@@ -28,17 +28,17 @@ public class TestDataFactory {
     public static List<User> createUsers(Integer numOfUsers, Id profileId){
         List<User> testUsers = new List<User>();
         for(Integer i=0; i<numOfUsers; i++){
-            User user = new User();
-            user.Alias = 'standt';
-            user.Email = 'testuserx' + i + '@testorg.com';
-            user.EmailEncodingKey = 'UTF-8';
-            user.LastName = 'Test';
-            user.LanguageLocaleKey = 'en_US';
-            user.LocaleSidKey='en_US';
-            user.ProfileId = profileId;
-            user.TimeZoneSidKey='America/Los_Angeles';
-            user.UserName='testuserx' + i + '@testorg.com';
-            testUsers.add(user);
+            User testUser = new User();
+            testUser.Alias = 'standt';
+            testUser.Email = 'testuserx' + i + '@testorg.com';
+            testUser.EmailEncodingKey = 'UTF-8';
+            testUser.LastName = 'Test';
+            testUser.LanguageLocaleKey = 'en_US';
+            testUser.LocaleSidKey='en_US';
+            testUser.ProfileId = profileId;
+            testUser.TimeZoneSidKey='America/Los_Angeles';
+            testUser.UserName='testuserx' + i + '@testorg.com';
+            testUsers.add(testUser);
         }
         return testUsers;
     }
@@ -46,9 +46,9 @@ public class TestDataFactory {
     public static List<Campaign> createCampaigns(Integer numOfCampaigns){
         List<Campaign> testCampaigns = new List<Campaign>();
         for(Integer i=0; i<numOfCampaigns; i++){
-            Campaign c = new Campaign();
-            c.Name = 'TestCampaign' + i;
-            testCampaigns.add(c);
+            Campaign testCampaign = new Campaign();
+            testCampaign.Name = 'TestCampaign' + i;
+            testCampaigns.add(testCampaign);
         }
         return testCampaigns;
     }
@@ -57,10 +57,10 @@ public class TestDataFactory {
     public static List<Account> createAccounts(Integer numOfAccounts){
         List<Account> testAccounts = new List<Account>();
         for(Integer i=0; i<numOfAccounts; i++){
-            Account acc = new Account();
-            acc.Name = 'OkAccount' + i;
-            acc.Account_level__c='Neutral';
-            testAccounts.add(acc);
+            Account testAccount = new Account();
+            testAccount.Name = 'OkAccount' + i;
+            testAccount.Account_level__c='Neutral';
+            testAccounts.add(testAccount);
         }
         return testAccounts;
     }
@@ -68,12 +68,12 @@ public class TestDataFactory {
     public static List<Contract> createContracts(Integer numOfContracts, List<Account> testAccounts){
         List<Contract> testContracts = new List<Contract>();
         for(Integer i=0;i<numOfContracts;i++){
-            Contract ct = new Contract();
-            ct.AccountId = testAccounts[i].Id;
-            ct.ContractTerm = 12;
-            ct.Status = 'Draft';
-            ct.StartDate = Date.today();
-            testContracts.add(ct);
+            Contract testContract = new Contract();
+            testContract.AccountId = testAccounts[i].Id;
+            testContract.ContractTerm = 12;
+            testContract.Status = 'Draft';
+            testContract.StartDate = Date.today();
+            testContracts.add(testContract);
         }
         return testContracts;
     }
@@ -101,12 +101,12 @@ public class TestDataFactory {
     public static List<Opportunity> createOpportunities(Integer numOfOpportunities){
         List<Opportunity> testOpportunities = new List<Opportunity>();
         for(Integer i=0; i<numOfOpportunities; i++){
-            Opportunity opp = new Opportunity();
-            opp.Name='OkOpportunity' + i;
-            opp.StageName='Prospecting';
-            opp.CloseDate=Date.today();
-            opp.Sales_Items_Capacity__c=DEFAULT_SALES_ITEMS_CAPACITY;
-            testOpportunities.add(opp);
+            Opportunity testOpportunity = new Opportunity();
+            testOpportunity.Name='OkOpportunity' + i;
+            testOpportunity.StageName='Prospecting';
+            testOpportunity.CloseDate=Date.today();
+            testOpportunity.Sales_Items_Capacity__c=DEFAULT_SALES_ITEMS_CAPACITY;
+            testOpportunities.add(testOpportunity);
         }
         return testOpportunities;
     }

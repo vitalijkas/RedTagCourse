@@ -35,8 +35,9 @@ public with sharing class WeatherApi {
     }
 
     public static HttpResponse getWeather(String city){
-        String endPoint = 'https://api.openweathermap.org/data/2.5/weather';
-        String apiKey = '4a3f3e24d692ea7db6b102a007f8ce24';
+        List<Weather_API_Data__mdt> weatherApiMdt = Weather_API_Data__mdt.getAll().values();
+        String endPoint = weatherApiMdt.get(0).Endpoint__c;
+        String apiKey = weatherApiMdt.get(0).API_Key__c;
         Map<String, String> params = new Map<String, String>{
             'q' => city,
             'appid' => apiKey,

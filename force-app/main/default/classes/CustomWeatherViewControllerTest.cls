@@ -5,12 +5,11 @@ private class CustomWeatherViewControllerTest {
     @TestSetup
     static void testSetup(){
         List<Weather__c> testWeathersList = TestDataFactory.createWeathers(WEATHERS_NUMBER, 'London');
-        insert testWeathers;
+        insert testWeathersList;
     }
 
     @isTest static void getWeatherTest(){
         List<Weather__c> testWeathersList = CustomWeatherViewController.getWeather();
-
-        System.assertEquals(testWeathersList.size(), 1);
+        System.assertEquals(1, testWeathersList.size());
     }
 }

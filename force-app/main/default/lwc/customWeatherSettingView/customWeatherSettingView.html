@@ -1,10 +1,12 @@
 <template>
-    <div class="slds-box slds-theme_shade slds-theme_alert-texture">
-        <div class="form-style">
-            <lightning-input label="City" type="text" value={city} onchange={handleChangeCity} class="validate" required></lightning-input>
-            <lightning-input label="Language" type="text" value={language} onchange={handleChangeLanguage} class="validate" required></lightning-input>
-            <lightning-button if:false={exists} variant="brand" label="Add settings" onclick={addWeatherSettingsClick} class="slds-m-right_x-small"></lightning-button>
-            <lightning-button if:true={exists} variant="brand" label="Edit settings" onclick={editWeatherSettingsClick} class="slds-m-right_x-small"></lightning-button>     
+    <div class="slds-card slds-p-around_medium">
+        <div class="form-container slds-grid slds-wrap slds-align_absolute-center">
+            <lightning-input label="City" type="text" value={city} onchange={handleChangeCity} class="validate slds-size_1-of-1" required></lightning-input>
+            <lightning-input label="Language" type="text" value={language} onchange={handleChangeLanguage} class="validate slds-size_1-of-1" required></lightning-input>
+            <div class="slds-p-top_small slds-size_1-of-1">
+                <lightning-button if:false={exists} variant="brand" label="Add settings" onclick={addWeatherSettingsClick}></lightning-button>
+                <lightning-button if:true={exists} variant="brand" label="Edit settings" onclick={editWeatherSettingsClick}></lightning-button>   
+            </div>
         </div>
     </div>
 </template>

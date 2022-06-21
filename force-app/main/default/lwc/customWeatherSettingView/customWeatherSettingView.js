@@ -3,8 +3,6 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getWeatherSettings from '@salesforce/apex/CustomWeatherSettingViewController.getWeatherSettings';
 import addWeatherSettings from '@salesforce/apex/CustomWeatherSettingViewController.addWeatherSettings';
 import editWeatherSettings from '@salesforce/apex/CustomWeatherSettingViewController.editWeatherSettings';
-import { loadStyle } from 'lightning/platformResourceLoader';
-import stylesCustomWeatherSettingsView from '@salesforce/resourceUrl/stylesCustomWeatherSettingsView';
 
 export default class CustomWeatherSettingView extends LightningElement {
     settingsId;
@@ -12,16 +10,7 @@ export default class CustomWeatherSettingView extends LightningElement {
     language;
     exists = false;
 
-    handleChangeCity(event){
-        this.city = event.detail.value;
-    }
-
-    handleChangeLanguage(event){
-        this.language = event.detail.value;
-    }
-
     connectedCallback(){
-        loadStyle(this, stylesCustomWeatherSettingsView);
         getWeatherSettings().then(result => {
             if(result.length > 0){
                 this.exists = true;
@@ -30,6 +19,14 @@ export default class CustomWeatherSettingView extends LightningElement {
                 this.settingsId = result[0].Id;
             }
         });
+    }
+
+    handleChangeCity(event){
+        this.city = event.detail.value;
+    }
+
+    handleChangeLanguage(event){
+        this.language = event.detail.value;
     }
 
     isInputValid() {
@@ -48,22 +45,10 @@ export default class CustomWeatherSettingView extends LightningElement {
         if(this.isInputValid()){
             addWeatherSettings({city: this.city, language: this.language})
             .then(() => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Setting successfully added!',
-                        variant: 'success'
-                    })
-                );
+                this.showToastEvent('Success', 'Setting successfully added!', 'success');
             })
             .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error on creating record',
-                        message: error,
-                        variant: 'error'
-                    })
-                );
+                this.showToastEvent('Error on creating record', error, 'error');
             });
         }
     }
@@ -72,23 +57,21 @@ export default class CustomWeatherSettingView extends LightningElement {
         if(this.isInputValid()){
             editWeatherSettings({city: this.city, language: this.language, weatherId: this.settingsId})
             .then(() => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Setting successfully edited!',
-                        variant: 'success'
-                    })
-                );
+                this.showToastEvent('Success', 'Setting successfully edited!', 'success');
             })
             .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error on editing record',
-                        message: error,
-                        variant: 'error'
-                    })
-                );
+                this.showToastEvent('Error on editing record', error, 'error');
             });
         }
+    }
+    
+    showToastMessage(title, message, variant){
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: title,
+                message: message,
+                variant: variant
+            })
+        );
     }
 }
