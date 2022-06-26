@@ -14,36 +14,9 @@ private class WeatherServiceTest {
         insert testWeathersList;
     }
 
-    private class HttpMock implements HttpCalloutMock {
-        private String status;
-        private String okBody;
-        private Integer statusCode;
-        private String errorBody;
-        
-        public HttpMock(String status, String okBody, String errorBody, Integer statusCode) {
-             this.status = status;
-             this.okBody = okBody;
-             this.errorBody = errorBody;
-             this.statusCode = statusCode;
-         }
- 
-         public HttpResponse respond(HttpRequest request) {
-             HttpResponse response = new HttpResponse();
-             response.setStatus(status);
-             response.setStatusCode(statusCode);
- 
-             if (response.getStatus().equals('OK') && String.isNotEmpty(okBody)) {
-                 response.setBody(okBody);
-             } else if (String.isNotEmpty(errorBody)) {
-                 response.setBody(errorBody);
-             }
-             return response;
-         }
-     }
-
     @isTest static void updateWeatherTest(){
         List<Weather_Setting__c> weatherSettings = [SELECT Id, CityName__c, Language__c FROM Weather_Setting__c];
-        Test.setMock(HttpCalloutMock.class, new HttpMock('OK', '', FAKE_JSON, 200));
+        Test.setMock(HttpCalloutMock.class, new HttpMockResponse('OK', '', FAKE_JSON, 200));
 
         Test.StartTest();
             WeatherService.updateWeather();
@@ -70,7 +43,7 @@ private class WeatherServiceTest {
     }
 
     @isTest static void updateWeatherResponseTest_negative(){
-        Test.setMock(HttpCalloutMock.class, new HttpMock('Not found', '', FAKE_JSON_NEGATIVE, 404));
+        Test.setMock(HttpCalloutMock.class, new HttpMockResponse('Not found', '', FAKE_JSON_NEGATIVE, 404));
 
         try {
             Test.StartTest();

@@ -10,6 +10,6 @@ private class CustomWeatherViewControllerTest {
 
     @isTest static void getWeatherTest(){
         List<Weather__c> testWeathersList = CustomWeatherViewController.getWeather();
-        System.assertEquals(1, testWeathersList.size());
+        System.assertEquals(WEATHERS_NUMBER, testWeathersList.size());
     }
 }

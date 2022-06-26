@@ -11,7 +11,7 @@ private class CustomWeatherSettingViewControllerTest {
 
     @isTest static void getWeatherSettingsTest(){
         List<Weather_Setting__c> testWeatherSettings = CustomWeatherSettingViewController.getWeatherSettings();
-        System.assertEquals(testWeatherSettings.size(), WEATHER_SETTINGS_NUMBER);
+        System.assertEquals(WEATHER_SETTINGS_NUMBER, testWeatherSettings.size());
     }
 
     @isTest static void addWeatherSettingsTest(){
@@ -20,7 +20,7 @@ private class CustomWeatherSettingViewControllerTest {
         Test.StopTest();
 
         List<Weather_Setting__c> testWeatherSettings = [SELECT Id FROM Weather_Setting__c WHERE Id =: testWeatherSetting.Id];
-        System.assertEquals(1, testWeatherSettings.size());
+        System.assertEquals(WEATHER_SETTINGS_NUMBER, testWeatherSettings.size());
     }
 
     @isTest static void editWeatherSettingsTest(){

@@ -11,14 +11,7 @@ export default class CustomWeatherSettingView extends LightningElement {
     exists = false;
 
     connectedCallback(){
-        getWeatherSettings().then(result => {
-            if(result.length > 0){
-                this.exists = true;
-                this.city = result[0].CityName__c;
-                this.language = result[0].Language__c;
-                this.settingsId = result[0].Id;
-            }
-        });
+        this.populateWeatherSettings();
     }
 
     handleChangeCity(event){
@@ -27,6 +20,17 @@ export default class CustomWeatherSettingView extends LightningElement {
 
     handleChangeLanguage(event){
         this.language = event.detail.value;
+    }
+
+    populateWeatherSettings() {
+        getWeatherSettings().then(result => {
+            if(result.length > 0){
+                this.exists = true;
+                this.city = result[0].CityName__c;
+                this.language = result[0].Language__c;
+                this.settingsId = result[0].Id;
+            }
+        });
     }
 
     isInputValid() {
