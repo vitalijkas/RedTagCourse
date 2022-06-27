@@ -8,9 +8,12 @@ public class PDFContractFromOppController {
 	public String labelFrontPageFormattedText { get; set; }
 
 	public PDFContractFromOppController(ApexPages.StandardController controller) {
-		opportunityRecord = (Opportunity) controller.getRecord();
-		opportunityRecord = [SELECT Id, ContractId FROM Opportunity WHERE Id = :opportunityRecord.Id];
-		products = [SELECT Product2Id, Quantity, UnitPrice FROM OpportunityLineItem WHERE OpportunityId = :opportunityRecord.Id];
+		Id opportunityRecordId = controller.getId();
+		opportunityRecord = [
+            SELECT Id, 
+            ContractId, 
+            (SELECT Product2Id, Quantity, UnitPrice FROM OpportunityLineItems) 
+            FROM Opportunity WHERE Id = :opportunityRecordId];
 
 		if (String.isNotBlank(opportunityRecord.ContractId)) {
 			Contract contractRecord = [SELECT CompanySignedId, CustomerSignedId FROM Contract WHERE Id = :opportunityRecord.ContractId];
@@ -25,7 +28,8 @@ public class PDFContractFromOppController {
 
 		sumOfQuantity = 0;
 		sumOfPrice = 0;
-		for (OpportunityLineItem productRecord : products) {
+		products = opportunityRecord.OpportunityLineItems;
+        for (OpportunityLineItem productRecord : products) {
 			sumOfQuantity += productRecord.Quantity;
 			sumOfPrice += productRecord.UnitPrice;
 		}
