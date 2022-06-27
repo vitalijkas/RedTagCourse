@@ -2,9 +2,9 @@
 public class TestDataFactory {
     @TestVisible private static Integer DEFAULT_SALES_ITEMS_CAPACITY = 3;
 
-    public static List<Account> createAccounts(Integer numOfAccounts){
+    public static List<Account> createAccounts(Integer numOfAccounts) {
         List<Account> testAccounts = new List<Account>();
-        for(Integer i=0; i<numOfAccounts; i++){
+        for (Integer i=0; i<numOfAccounts; i++) {
             Account testAccount = new Account();
             testAccount.Name = 'OkAccount' + i;
             testAccount.Account_level__c='Neutral';
@@ -13,9 +13,9 @@ public class TestDataFactory {
         return testAccounts;
     }
 
-    public static List<Contact> createContacts(Integer numOfContacts){
+    public static List<Contact> createContacts(Integer numOfContacts) {
         List<Contact> testContacts = new List<Contact>();
-        for(Integer i=0; i<numOfContacts; i++){
+        for (Integer i=0; i<numOfContacts; i++) {
             Contact testContact = new Contact();
             testContact.FirstName = 'OkAccount' + i;
             testContact.LastName = 'OkLast' + i;
@@ -24,9 +24,9 @@ public class TestDataFactory {
         return testContacts;
     }
 
-    public static List<User> createUsers(Integer numOfUsers, Id profileId){
+    public static List<User> createUsers(Integer numOfUsers, Id profileId) {
         List<User> testUsers = new List<User>();
-        for(Integer i=0; i<numOfUsers; i++){
+        for (Integer i=0; i<numOfUsers; i++) {
             User testUser = new User();
             testUser.Alias = 'standt';
             testUser.Email = 'testuserx' + i + '@testorg.com';
@@ -42,9 +42,9 @@ public class TestDataFactory {
         return testUsers;
     }
 
-    public static List<Contract> createContracts(Integer numOfContracts, List<Account> testAccounts){
+    public static List<Contract> createContracts(Integer numOfContracts, List<Account> testAccounts) {
         List<Contract> testContracts = new List<Contract>();
-        for(Integer i=0;i<numOfContracts;i++){
+        for (Integer i=0; i<numOfContracts; i++) {
             Contract testContract = new Contract();
             testContract.AccountId = testAccounts[i].Id;
             testContract.ContractTerm = 12;
@@ -55,7 +55,7 @@ public class TestDataFactory {
         return testContracts;
     }
 
-    public static ContentVersion createContentVersion(){
+    public static ContentVersion createContentVersion() {
         ContentVersion contentVersion = new ContentVersion();
         Blob body = Blob.valueof('lala');
         contentVersion.ContentLocation = 'S';
@@ -66,7 +66,7 @@ public class TestDataFactory {
         return contentVersion;
     }
 
-    public static ContentDocumentLink createContentDocumentLink(Id accountId, Id contentDocumentId){
+    public static ContentDocumentLink createContentDocumentLink(Id accountId, Id contentDocumentId) {
         ContentDocumentLink contentDocumentLink = new ContentDocumentLink();
         contentDocumentLink.ContentDocumentId = contentDocumentId;
         contentDocumentLink.LinkedEntityId = accountId;
@@ -75,9 +75,9 @@ public class TestDataFactory {
         return contentDocumentLink;
     }
 
-    public static List<Opportunity> createOpportunities(Integer numOfOpportunities){
+    public static List<Opportunity> createOpportunities(Integer numOfOpportunities) {
         List<Opportunity> testOpportunities = new List<Opportunity>();
-        for(Integer i=0; i<numOfOpportunities; i++){
+        for (Integer i=0; i<numOfOpportunities; i++) {
             Opportunity testOpportunity = new Opportunity();
             testOpportunity.Name='OkOpportunity' + i;
             testOpportunity.StageName='Prospecting';
@@ -88,9 +88,9 @@ public class TestDataFactory {
         return testOpportunities;
     }
 
-    public static List<Sales__c> createSales(Integer numOfSales, Id salesOwnerId){
+    public static List<Sales__c> createSales(Integer numOfSales, Id salesOwnerId) {
         List<Sales__c> testSales = new List<Sales__c>();
-        for(Integer i=0; i<numOfSales; i++){
+        for (Integer i=0; i<numOfSales; i++) {
             Sales__c sale = new Sales__c();
             sale.Name='OkSales' + i;
             sale.Opportunity__c=salesOwnerId;
