@@ -35,6 +35,6 @@ private class PDFContractFromOppControllerTest {
             PDFContractFromOppController controller = new PDFContractFromOppController(sc);
             Test.setCurrentPage(pageRef);
         Test.StopTest();
-        System.assert(pageRef != null);
+        System.assertNotEquals(pageRef, null);
     }
 }
