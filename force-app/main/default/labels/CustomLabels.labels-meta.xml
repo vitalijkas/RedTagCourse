@@ -1,17 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
-        <fullName>OpportunityNameFormat</fullName>
+        <fullName>City_label</fullName>
+        <categories>Labels for weather view</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>Opportunity Name Format</shortDescription>
-        <value>{0}{1}{2}</value>
+        <shortDescription>City label</shortDescription>
+        <value>City</value>
     </labels>
     <labels>
-        <fullName>myOppFormatLabel</fullName>
+        <fullName>Date_label</fullName>
+        <categories>Labels for weather view</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>Format Opportunities for Email</shortDescription>
-        <value>{0}. {1}, {2}</value>
+        <shortDescription>Date label</shortDescription>
+        <value>Date</value>
+    </labels>
+    <labels>
+        <fullName>Description_label</fullName>
+        <categories>Labels for weather view</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Description label</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>Feels_like_label</fullName>
+        <categories>Labels for weather view</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Feels like label</shortDescription>
+        <value>Feels like</value>
+    </labels>
+    <labels>
+        <fullName>Humidity_label</fullName>
+        <categories>Labels for weather view</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Humidity label</shortDescription>
+        <value>Humidity</value>
+    </labels>
+    <labels>
+        <fullName>Location_label</fullName>
+        <categories>Labels for weather view</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Location label</shortDescription>
+        <value>Location</value>
+    </labels>
+    <labels>
+        <fullName>Pressure_label</fullName>
+        <categories>Labels for weather view</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Pressure label</shortDescription>
+        <value>Pressure</value>
+    </labels>
+    <labels>
+        <fullName>Temperature_label</fullName>
+        <categories>Labels for weather view</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Temperature label</shortDescription>
+        <value>Temperature</value>
+    </labels>
+    <labels>
+        <fullName>Weather_Name</fullName>
+        <categories>Weather</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Weather Name Template</shortDescription>
+        <value>Weaher for {0}</value>
+    </labels>
+    <labels>
+        <fullName>Weather_Settings_Name</fullName>
+        <categories>Weather</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Weather Settings Name</shortDescription>
+        <value>Weather settings for {0}</value>
+    </labels>
+    <labels>
+        <fullName>Wind_speed_label</fullName>
+        <categories>Labels for weather view</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wind speed label</shortDescription>
+        <value>Wind speed</value>
     </labels>
 </CustomLabels>
