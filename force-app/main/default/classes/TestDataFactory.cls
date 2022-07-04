@@ -1,6 +1,58 @@
 @isTest
 public class TestDataFactory {
     @TestVisible private static Integer DEFAULT_SALES_ITEMS_CAPACITY = 3;
+    
+    public static List<Weather_Setting__c> createWeatherSetting(Integer numOfWeatherSettings, String city, String language){
+        List<Weather_Setting__c> testWeatherSettings = new List<Weather_Setting__c>();
+        for(Integer i=0; i<numOfWeatherSettings; i++){
+            Weather_Setting__c testWeatherSetting = new Weather_Setting__c();
+            testWeatherSetting.Name = 'Weather setting for ' + city;
+            testWeatherSetting.CityName__c = city;
+            testWeatherSetting.Language__c = language;
+            testWeatherSettings.add(testWeatherSetting);
+        }
+        return testWeatherSettings;
+    }
+
+    public static List<Weather__c> createWeathers(Integer numOfWeathers, String city){
+        List<Weather__c> testWeathers = new List<Weather__c>();
+        for(Integer i=0; i<numOfWeathers; i++){
+            Weather__c testWeather = new Weather__c();
+            testWeather.Name = 'Weather setting for ' + city;
+            testWeather.CityName__c = city;
+            testWeathers.add(testWeather);
+        }
+        return testWeathers;
+    }
+
+    public static List<User> createUsers(Integer numOfUsers, Id profileId){
+        List<User> testUsers = new List<User>();
+        for(Integer i=0; i<numOfUsers; i++){
+            User testUser = new User();
+            testUser.Alias = 'standt';
+            testUser.Email = 'testuserx' + i + '@testorg.com';
+            testUser.EmailEncodingKey = 'UTF-8';
+            testUser.LastName = 'Test';
+            testUser.LanguageLocaleKey = 'en_US';
+            testUser.LocaleSidKey='en_US';
+            testUser.ProfileId = profileId;
+            testUser.TimeZoneSidKey='America/Los_Angeles';
+            testUser.UserName='testuserx' + i + '@testorg.com';
+            testUsers.add(testUser);
+        }
+        return testUsers;
+    }
+
+    public static List<Campaign> createCampaigns(Integer numOfCampaigns){
+        List<Campaign> testCampaigns = new List<Campaign>();
+        for(Integer i=0; i<numOfCampaigns; i++){
+            Campaign testCampaign = new Campaign();
+            testCampaign.Name = 'TestCampaign' + i;
+            testCampaigns.add(testCampaign);
+        }
+        return testCampaigns;
+    }
+
 
     public static List<Account> createAccounts(Integer numOfAccounts) {
         List<Account> testAccounts = new List<Account>();

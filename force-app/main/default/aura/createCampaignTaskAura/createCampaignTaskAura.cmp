@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name="recordId" type="String"/>
+    <c:createCampaignTask recordId="{!v.recordId}" onclose="{!c.closeMethodInAuraController}"/>
+</aura:component>   

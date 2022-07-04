@@ -1,0 +1,12 @@
+<template>
+    <div class="slds-card slds-p-around_medium">
+        <div class="slds-grid slds-wrap slds-align_absolute-center slds-size_1-of-6">
+            <lightning-input label="City" type="text" value={city} onchange={handleChangeCity} class="validate slds-size_1-of-1" required></lightning-input>
+            <lightning-input label="Language" type="text" value={language} onchange={handleChangeLanguage} class="validate slds-size_1-of-1" required></lightning-input>
+            <div class="slds-p-top_small slds-size_1-of-1">
+                <lightning-button if:false={exists} variant="brand" label="Add settings" onclick={addWeatherSettingsClick}></lightning-button>
+                <lightning-button if:true={exists} variant="brand" label="Edit settings" onclick={editWeatherSettingsClick}></lightning-button>   
+            </div>
+        </div>
+    </div>
+</template>
