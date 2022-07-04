@@ -1,0 +1,90 @@
+<apex:page standardController="Opportunity" extensions="PDFContractFromOppController" standardStylesheets="false" renderAs="pdf">
+    <apex:stylesheet value="{!$Resource.pdfCss}"/>
+
+    <div class="top-right-div">
+        <apex:outputText value="{0, date, MMMM d','  yyyy}">
+            <apex:param value="{!NOW()}" />
+        </apex:outputText>
+    </div>
+
+    <div class="top-left-div">
+        <img src="{!$Resource.pdfHeaderLogo}" height="75px"/>
+    </div>
+
+    <div class="front-page">
+        <h1>{!labelFrontPageFormattedText}</h1>
+    </div>
+
+    <div class="page-break">
+        <div class="content">
+            <h2>{!$Label.pdfTermsAndConditionsHeader}</h2>
+            <ol>
+                <li>
+                    {!$Label.pdfTermsAndConditionsBody}
+                </li>
+                <li>
+                    {!$Label.pdfTermsAndConditionsBody2}
+                </li>
+                <li>
+                    {!$Label.pdfTermsAndConditionsBody3}
+                </li>
+                <li>
+                    {!$Label.pdfTermsAndConditionsBody4}
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="page-break">
+        <div class="content">
+            <h2>{!$Label.pdfSubjectOfContractHeader}</h2>
+            <apex:pageBlock >
+                <apex:pageBlockTable var="s" value="{!products}" headerClass="border" footerClass="border" columnClasses="border" style="table-layout:fixed">
+                    <apex:column headerValue="{!$Label.pdfProductTableNameHeader}">
+                        <apex:outputField value="{!s.Product2Id}"/>
+                        <apex:facet name="footer">
+                            <span>{!$Label.pdfProductTableTotalsHeader}</span>
+                        </apex:facet>
+                    </apex:column> 
+                    <apex:column headerValue="{!$Label.pdfProductTableQuantityHeader}"> 
+                        <apex:outputField value="{!s.Quantity}"/> 
+                        <apex:facet name="footer">
+                            <span>{!sumOfQuantity}</span>
+                        </apex:facet>
+                    </apex:column> 
+                    <apex:column headerValue="{!$Label.pdfProductTablePriceHeader}"> 
+                        <apex:outputText value="{!s.UnitPrice}"/>
+                        <apex:facet name="footer">
+                            <span>{!sumOfPrice}</span>
+                        </apex:facet>
+                    </apex:column>
+                </apex:pageBlockTable> 
+            </apex:pageBlock> 
+        </div>
+    </div>
+
+    <div class="page-break">
+        <div class="content">
+            <h2>{!$Label.pdfSignatureHeader}</h2>
+            <div class="signature">
+                <apex:pageBlock>
+                    <apex:pageBlockSection columns="2">
+                        <apex:pageBlockSectionItem>
+                            _______________________________________
+                            _______________________________________
+                            _______________________________________
+                            {!customer}
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem>
+                            _______________________________________
+                            _______________________________________
+                            _______________________________________
+                            {!seller_company}
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </div>
+        </div>
+    </div>
+</apex:page>
+

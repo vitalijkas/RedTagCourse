@@ -88,4 +88,95 @@
         <shortDescription>Wind speed label</shortDescription>
         <value>Wind speed</value>
     </labels>
+    <labels>
+        <fullName>Op_capacity_error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Op capacity error</shortDescription>
+        <value>Capacity is full</value>
+    </labels>
+    <labels>
+        <fullName>pdfFrontPageText</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfFrontPageText</shortDescription>
+        <value>Contract between {custmer} and {seller company}</value>
+    </labels>
+    <labels>
+        <fullName>pdfProductTableNameHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfProductTableNameHeader</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>pdfProductTablePriceHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfProductTablePriceHeader</shortDescription>
+        <value>Price</value>
+    </labels>
+    <labels>
+        <fullName>pdfProductTableQuantityHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfProductTableQuantityHeader</shortDescription>
+        <value>Quantity</value>
+    </labels>
+    <labels>
+        <fullName>pdfProductTableTotalsHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfProductTableTotalsHeader</shortDescription>
+        <value>Totals:</value>
+    </labels>
+    <labels>
+        <fullName>pdfSignatureHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfSignatureHeader</shortDescription>
+        <value>Signature</value>
+    </labels>
+    <labels>
+        <fullName>pdfSubjectOfContractHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfSubjectOfContractHeader</shortDescription>
+        <value>Subject of contract:</value>
+    </labels>
+    <labels>
+        <fullName>pdfTermsAndConditionsBody</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfTermsAndConditionsBody1</shortDescription>
+        <value>Lorem ipsum, mattis sem mattis sit pharetra urna magna porta ut, risus massa quisque ligula risus porta pellentesque nec massa. Non cursus sapien leo tellus risus fusce sem massa ornare sed ut molestie leo quam diam quam arcu ornare nulla orci ligula. Ipsum cursus sit sodales nibh congue at lorem tellus orci rutrum adipiscing integer congue lectus. Magna pharetra morbi molestie gravida massa molestie, quisque maecenas auctor at molestie mauris amet quam rutrum. Eu bibendum rutrum, sem, ultricies pellentesque duis integer justo vitae pharetra, sapien congue, integer lorem eros, amet, pharetra. Sapien et quisque nulla mauris: nec curabitur nam lectus ipsum lorem bibendum mauris duis pharetra massa&amp;nbsp;&amp;mdash; in.</value>
+    </labels>
+    <labels>
+        <fullName>pdfTermsAndConditionsBody2</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfTermsAndConditionsBody2</shortDescription>
+        <value>Sapien quisque mattis, diam congue tellus at proin ultricies: integer vivamus: orci quam adipiscing fusce, proin gravida&amp;nbsp;&amp;mdash; tempus, sed. Nec at pharetra odio mauris, magna orci auctor maecenas, sed et, vivamus. Integer nec sed ut magna maecenas massa eu congue risus sed elementum arcu tempus&amp;nbsp;&amp;mdash; metus fusce&amp;nbsp;&amp;mdash; vulputate duis bibendum sodales tempus nam quisque eu. Nam et arcu vivamus ut justo sagittis cursus, orci vivamus, quisque sagittis odio congue sodales adipiscing magna ultricies mattis diam quam, sagittis odio sodales. Lectus magna, nam rutrum bibendum eu rutrum nibh, lectus&amp;nbsp;&amp;mdash; tellus ultricies bibendum massa orci non sapien adipiscing donec eu ligula. Sagittis morbi ipsum lectus maecenas vitae pellentesque donec mattis pharetra porttitor enim.</value>
+    </labels>
+    <labels>
+        <fullName>pdfTermsAndConditionsBody3</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfTermsAndConditionsBody3</shortDescription>
+        <value>Nec risus at lectus lorem, nam arcu at cursus, mauris, ut sodales, sapien, massa ut duis sapien. Mattis integer curabitur leo justo nibh metus ligula gravida pellentesque odio non arcu. Sodales curabitur malesuada sit quam porta nec sem donec porta ipsum lectus auctor sapien enim. Donec eget risus sapien congue tellus commodo justo eu eros ut, ornare nibh ultricies quam. Non et adipiscing pharetra gravida sem et ipsum justo ut nec bibendum quam ipsum urna amet porttitor in magna, sem bibendum sodales duis commodo: orci.</value>
+    </labels>
+    <labels>
+        <fullName>pdfTermsAndConditionsBody4</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfTermsAndConditionsBody4</shortDescription>
+        <value>Leo maecenas, vulputate vitae justo integer, maecenas diam, porta, maecenas commodo eget sodales. Sit porttitor sodales elementum, lorem ipsum, adipiscing arcu sit non lorem eget ut. Rutrum, ut integer, sapien tempus mauris curabitur sed bibendum metus sed. Integer sit, non sapien sodales, justo leo integer, vitae mattis morbi eu duis proin. Vivamus eros ligula adipiscing porttitor fusce eros orci amet ultricies tellus justo enim, non nec at mauris at leo nulla. Massa orci porttitor mauris tempus sapien gravida molestie nam justo ut enim porttitor odio malesuada, mattis donec lectus et quisque odio pellentesque lectus, leo elementum. Vulputate congue, quisque, eros justo cursus a: tempus, a gravida vivamus auctor vulputate rutrum auctor maecenas.</value>
+    </labels>
+    <labels>
+        <fullName>pdfTermsAndConditionsHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pdfTermsAndConditionsHeader</shortDescription>
+        <value>General terms and conditions:</value>
+    </labels>
 </CustomLabels>
