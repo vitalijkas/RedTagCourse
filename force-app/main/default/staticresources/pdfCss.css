@@ -1,0 +1,48 @@
+.page-break {
+    page-break-before:always;
+}
+.page-break:first-child {
+    page-break-before: avoid;
+}
+.top-right-div{
+    position: running(top-right-div);
+    text-align: right;
+}
+.top-left-div{
+    position: running(top-left-div);
+    text-align: left;
+}
+.content{
+    margin-top: 40px;
+}
+.front-page{
+    position:absolute;
+    text-align: center;
+    top:10%;
+}
+.border{
+    text-align: left;
+    border:0.8px solid black;
+}
+a:link{
+    text-decoration: none;
+    color: black;
+}
+th, td{
+    text-align: center;
+}
+
+@page {
+    size: A4;
+    @bottom-center {
+        content: "Page " counter(page) " of " counter(pages);
+    }
+
+    @top-right {
+        content: element(top-right-div); 
+    }
+
+    @top-left {
+        content: element(top-left-div);
+    }
+}
