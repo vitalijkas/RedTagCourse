@@ -25,25 +25,7 @@ public class TestDataFactory {
         return testWeathers;
     }
 
-    public static List<User> createUsers(Integer numOfUsers, Id profileId){
-        List<User> testUsers = new List<User>();
-        for(Integer i=0; i<numOfUsers; i++){
-            User testUser = new User();
-            testUser.Alias = 'standt';
-            testUser.Email = 'testuserx' + i + '@testorg.com';
-            testUser.EmailEncodingKey = 'UTF-8';
-            testUser.LastName = 'Test';
-            testUser.LanguageLocaleKey = 'en_US';
-            testUser.LocaleSidKey='en_US';
-            testUser.ProfileId = profileId;
-            testUser.TimeZoneSidKey='America/Los_Angeles';
-            testUser.UserName='testuserx' + i + '@testorg.com';
-            testUsers.add(testUser);
-        }
-        return testUsers;
-    }
-
-    public static List<Campaign> createCampaigns(Integer numOfCampaigns){
+    public static List<Campaign> createCampaigns(Integer numOfCampaigns) {
         List<Campaign> testCampaigns = new List<Campaign>();
         for(Integer i=0; i<numOfCampaigns; i++){
             Campaign testCampaign = new Campaign();
@@ -52,7 +34,6 @@ public class TestDataFactory {
         }
         return testCampaigns;
     }
-
 
     public static List<Account> createAccounts(Integer numOfAccounts) {
         List<Account> testAccounts = new List<Account>();
@@ -142,12 +123,23 @@ public class TestDataFactory {
 
     public static List<Sales__c> createSales(Integer numOfSales, Id salesOwnerId) {
         List<Sales__c> testSales = new List<Sales__c>();
-        for (Integer i=0; i<numOfSales; i++) {
-            Sales__c sale = new Sales__c();
-            sale.Name='OkSales' + i;
-            sale.Opportunity__c=salesOwnerId;
-            testSales.add(sale);
+        for(Integer i=0; i<numOfSales; i++){
+            Sales__c salesRecord = new Sales__c();
+            salesRecord.Name='OkSales' + i;
+            salesRecord.Opportunity__c=salesOwnerId;
+            testSales.add(salesRecord);
         }
         return testSales;
+    }
+
+    public static List<Case> createCases(Integer numOfCases) {
+        List<Case> testCases = new List<Case>();
+        for (Integer i=0; i<numOfCases; i++) {
+            Case caseRecord = new Case();
+            caseRecord.Status = 'New';
+            caseRecord.Origin = 'Email';
+            testCases.add(caseRecord);
+        }
+        return testCases;
     }
 }
