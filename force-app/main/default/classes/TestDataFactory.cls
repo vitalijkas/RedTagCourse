@@ -68,6 +68,7 @@ public class TestDataFactory {
             testUser.LanguageLocaleKey = 'en_US';
             testUser.LocaleSidKey='en_US';
             testUser.ProfileId = profileId;
+            testUser.Branch_Number__c = '0001';
             testUser.TimeZoneSidKey='America/Los_Angeles';
             testUser.UserName='testuserx' + i + '@testorg.com';
             testUsers.add(testUser);
@@ -138,6 +139,7 @@ public class TestDataFactory {
             Case caseRecord = new Case();
             caseRecord.Status = 'New';
             caseRecord.Origin = 'Email';
+            caseRecord.Branch_Number__c = '0001';
             testCases.add(caseRecord);
         }
         return testCases;

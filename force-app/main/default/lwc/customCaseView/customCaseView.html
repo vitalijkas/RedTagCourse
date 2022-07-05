@@ -1,0 +1,69 @@
+<template>
+    <div class="slds-grid">
+       <div style={columnSize}>
+          <lightning-datatable
+             key-field="id" 
+             data={data} 
+             columns={columns}
+             onrowselection={getSelectedRow}
+             max-row-selection="1"
+             >
+          </lightning-datatable>
+       </div>
+       <div style={columnSize} if:true={spinner}>
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+       </div>
+       <div class='slds-p-left_medium' style={columnSize} if:true={isSelected}>
+          <lightning-record-view-form
+             object-api-name='Case'
+             record-id={caseId}
+             >
+             <div class="slds-card">
+                <div class="slds-card__header slds-grid">
+                   <header class="slds-media slds-media_center slds-has-flexi-truncate slds-border_bottom">
+                      <div class="slds-card__header-title slds-p-bottom_medium slds-size_1-of-2">
+                         <h2>Case Details</h2>
+                      </div>
+                      <div class="slds-p-bottom_medium slds-size_1-of-2">
+                         <button class="slds-button slds-button_neutral slds-float_right" onclick={closeDetails} style="color: red">X</button>
+                      </div>
+                   </header>
+                </div>
+                <div class="slds-media__body slds-grid">
+                   <div class="slds-p-around_small slds-size_1-of-2">
+                      <lightning-output-field class="slds-border_bottom" field-name='OwnerId'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='CaseNumber'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='ContactId'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='AccountId'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Type'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Reason'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='CurrencyIsoCode'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='SuppliedEmail'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='SuppliedName'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='CreatedDate'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Product__c'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='PotentialLiability__c'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='CreatedById'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Subject'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Description'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Comments'></lightning-output-field>
+                   </div>
+                   <div class="slds-p-around_small slds-size_1-of-2">
+                      <lightning-output-field class="slds-border_bottom" field-name='Status'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Priority'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='ContactPhone'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='ContactEmail'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='Origin'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='SuppliedCompany'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='SuppliedPhone'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='ClosedDate'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='EngineeringReqNumber__c'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='SLAViolation__c'></lightning-output-field>
+                      <lightning-output-field class="slds-border_bottom" field-name='LastModifiedById'></lightning-output-field>
+                   </div>
+                </div>
+             </div>
+          </lightning-record-view-form>
+       </div>
+    </div>
+ </template>
