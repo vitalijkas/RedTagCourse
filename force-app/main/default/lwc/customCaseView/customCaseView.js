@@ -4,26 +4,28 @@ import getCases from '@salesforce/apex/CustomCaseViewController.getCases';
 import updateCase from '@salesforce/apex/CustomCaseViewController.updateCase';
 import getUserBranchNumber from '@salesforce/apex/CustomCaseViewController.getUserBranchNumber';
 import soundNotification from '@salesforce/resourceUrl/NotificationSound';
+import { labels  } from 'c/labelUtility';
 import userId from '@salesforce/user/Id';
 
 
 export default class CustomCaseView extends LightningElement {
     @track data = [];
     @track caseId = '';
+    @track label = labels;
     channelName = '/event/New_Case_Record__e';
-    columnSize = 'width: 100%';
+    columnSize = 'slds-size_1-of-1';
     currentUserBranchNumber = '';
     isSelected = false;
     spinner = false;
 
     columns = [
-        {label: 'Case Number', fieldName: 'caseUrl', type: 'url', 
+        {label: this.label.caseNumber, fieldName: 'caseUrl', type: 'url', 
         typeAttributes: {
             label: {
                fieldName: 'caseNumber'}},
                target: '_blank'},
-        {label: 'Created Date', fieldName: 'createdDate', type: 'date'},
-        {label: 'Status', fieldName: 'caseStatus'},
+        {label: this.label.createdDate, fieldName: 'createdDate', type: 'date'},
+        {label: this.label.status, fieldName: 'caseStatus'},
     ];
 
     connectedCallback() {
@@ -63,6 +65,7 @@ export default class CustomCaseView extends LightningElement {
     async subscribeOnCaseEvent() {
         await subscribe(this.channelName, -1, (result) => {
             const response = JSON.parse(JSON.stringify(result));
+            console.log('im in ev ', response.data.payload.Case_Branch_Number__c)
             if (response.data.payload.Case_Branch_Number__c === this.currentUserBranchNumber) {
                 this.soundNotification();
                 this.populateCaseRecords();
@@ -77,7 +80,7 @@ export default class CustomCaseView extends LightningElement {
     }
 
     getSelectedRow(event) {
-        this.columnSize = 'width: 50%';
+        this.columnSize = 'slds-size_1-of-2';
         this.caseId = event.detail.selectedRows[0].caseUrl.split('/')[1];
         if (event.detail.selectedRows[0].caseStatus !== 'In Progress') {
             this.isSelected = false;
@@ -105,7 +108,7 @@ export default class CustomCaseView extends LightningElement {
     }
 
     closeDetails() {
-        this.columnSize = 'width: 100%';
+        this.columnSize = 'slds-size_1-of-1';
         this.isSelected = false;
         this.caseId = '';
     }
