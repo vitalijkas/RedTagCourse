@@ -7,7 +7,7 @@ public class CaseTriggerHandlerTest {
         insert testCases;
     }
 
-    @isTest static void publishCaseEvent() {
+    @isTest static void publishCaseEventTest() {
         Case testCase = [SELECT Id FROM Case LIMIT 1];
         
         Test.startTest();
@@ -15,6 +15,15 @@ public class CaseTriggerHandlerTest {
             update testCase;
         Test.stopTest();
 
-        System.assertEquals(1, CaseService.listCaseEvents.size());
+        System.assertEquals(OBJECT_NUMBER, CaseService.listCaseEvents.size());
+    }
+
+    @isTest static void publishCaseCreateEventTest() {
+        Test.startTest();
+            insert TestDataFactory.createCases(OBJECT_NUMBER);
+        Test.stopTest();
+
+        System.assertEquals(OBJECT_NUMBER, CaseService.listCaseCreateEvents.size());
+
     }
 }

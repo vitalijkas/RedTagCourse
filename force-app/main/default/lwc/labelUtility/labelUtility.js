@@ -7,6 +7,11 @@ import location from '@salesforce/label/c.Location_label';
 import pressure from '@salesforce/label/c.Pressure_label';
 import temperature from '@salesforce/label/c.Temperature_label';
 import windSpeed from '@salesforce/label/c.Wind_speed_label';
+import detailsHeader from '@salesforce/label/c.Details_header';
+import caseNumber from '@salesforce/label/c.Case_Number_Label';
+import createdDate from '@salesforce/label/c.Created_Date_label';
+import status from '@salesforce/label/c.Status_Label';
+
 
 const labels = {
     city,
@@ -17,7 +22,11 @@ const labels = {
     location,
     pressure,
     temperature,
-    windSpeed
+    windSpeed,
+    detailsHeader,
+    caseNumber,
+    createdDate,
+    status
 };
 
 export {labels};
